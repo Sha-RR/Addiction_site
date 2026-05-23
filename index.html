@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clarity Health — Addiction Medicine</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --deep: #0e1f3a;
+    --teal: #1a8c7a;
+    --teal-light: #22b09a;
+    --gold: #c9a84c;
+    --cream: #f5f0e8;
+    --white: #ffffff;
+    --gray: #6b7280;
+    --light: #f8f9fb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(10,22,40,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600;
+    color: var(--white); letter-spacing: 0.04em;
+  }
+  .logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75); text-decoration: none;
+    font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--teal); color: var(--white);
+    padding: 0.6rem 1.4rem; border-radius: 4px;
+    font-size: 0.85rem; letter-spacing: 0.04em; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--teal-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(26,140,122,0.18), transparent 70%);
+  }
+  .hero-bg-text {
+    position: absolute; right: -2%; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(8rem, 16vw, 18rem);
+    font-weight: 300; color: rgba(255,255,255,0.03);
+    line-height: 1; pointer-events: none; user-select: none;
+    white-space: nowrap;
+  }
+  .hero-left {
+    padding: 8rem 5% 6rem 8%;
+    position: relative; z-index: 2;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.35);
+    color: var(--gold); padding: 0.4rem 1rem; border-radius: 50px;
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--white); margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--teal-light); }
+  .hero p {
+    color: rgba(255,255,255,0.65);
+    font-size: 1.05rem; line-height: 1.7;
+    max-width: 480px; margin-bottom: 2.5rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal); color: var(--white);
+    padding: 0.9rem 2rem; border-radius: 6px;
+    font-size: 0.9rem; letter-spacing: 0.04em; text-decoration: none;
+    transition: all 0.25s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,140,122,0.4); }
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.3); color: var(--white);
+    padding: 0.9rem 2rem; border-radius: 6px;
+    font-size: 0.9rem; letter-spacing: 0.04em; text-decoration: none;
+    transition: all 0.25s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem;
+    padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 600;
+    color: var(--gold); line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem; color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em; text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+  .hero-right {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8rem 8% 6rem 2%;
+  }
+  .hero-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px; padding: 2.5rem;
+    width: 100%; max-width: 380px;
+  }
+  .hero-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  .info-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .info-icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: rgba(26,140,122,0.2); border: 1px solid rgba(26,140,122,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .info-text strong { display: block; color: var(--white); font-size: 0.9rem; margin-bottom: 0.15rem; }
+  .info-text span { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
+  .emergency-bar {
+    margin-top: 1.5rem; padding: 1rem;
+    background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 10px; text-align: center;
+  }
+  .emergency-bar p { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-bottom: 0.2rem; }
+  .emergency-bar strong { color: var(--gold); font-size: 1.1rem; letter-spacing: 0.05em; }
+
+  /* ── SECTION WRAPPER ── */
+  section { padding: 6rem 8%; }
+  .section-label {
+    display: inline-block;
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400;
+    line-height: 1.15; color: var(--navy);
+  }
+  .section-title em { font-style: italic; color: var(--teal); }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--light);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .about-text p {
+    color: var(--gray); line-height: 1.8; margin-top: 1.2rem; font-size: 1rem;
+  }
+  .about-pillars {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2.5rem;
+  }
+  .pillar {
+    background: var(--white); border-radius: 12px;
+    padding: 1.3rem; border-left: 3px solid var(--teal);
+  }
+  .pillar h4 { font-size: 0.9rem; font-weight: 500; color: var(--navy); margin-bottom: 0.3rem; }
+  .pillar p { font-size: 0.8rem; color: var(--gray); line-height: 1.5; }
+  .about-visual {
+    position: relative;
+  }
+  .about-img-block {
+    background: linear-gradient(135deg, var(--deep), var(--navy));
+    border-radius: 20px; overflow: hidden;
+    aspect-ratio: 4/5; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative;
+  }
+  .about-img-block::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(26,140,122,0.3), transparent 60%);
+  }
+  .about-img-inner {
+    position: relative; z-index: 1; text-align: center; padding: 2rem;
+  }
+  .cross-icon {
+    font-size: 4rem; margin-bottom: 1rem; opacity: 0.9;
+  }
+  .about-img-inner h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; color: var(--white); font-weight: 300;
+  }
+  .about-img-inner p { color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 0.5rem; }
+  .about-badge-float {
+    position: absolute; bottom: -1.5rem; right: -1.5rem;
+    background: var(--gold); color: var(--navy);
+    border-radius: 14px; padding: 1.2rem 1.5rem;
+    text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+  .about-badge-float strong { display: block; font-size: 2rem; font-family: 'Cormorant Garamond', serif; }
+  .about-badge-float span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+  /* ── SERVICES ── */
+  .services { background: var(--white); }
+  .services-header { text-align: center; margin-bottom: 3.5rem; }
+  .services-header p { color: var(--gray); max-width: 540px; margin: 1rem auto 0; line-height: 1.7; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .service-card {
+    border: 1px solid #e8ecf0; border-radius: 16px; padding: 2rem;
+    transition: all 0.3s; position: relative; overflow: hidden;
+    background: var(--white);
+  }
+  .service-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(26,140,122,0.04), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .service-card:hover { border-color: var(--teal); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,140,122,0.1); }
+  .service-card:hover::before { opacity: 1; }
+  .service-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    background: rgba(26,140,122,0.1); display: flex;
+    align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1.2rem;
+  }
+  .service-card h3 { font-size: 1.05rem; font-weight: 500; margin-bottom: 0.6rem; }
+  .service-card p { color: var(--gray); font-size: 0.87rem; line-height: 1.65; }
+  .service-tag {
+    display: inline-block; margin-top: 1rem;
+    background: var(--light); color: var(--teal);
+    padding: 0.25rem 0.7rem; border-radius: 50px;
+    font-size: 0.72rem; letter-spacing: 0.04em;
+  }
+
+  /* ── DOCTORS ── */
+  .doctors { background: var(--navy); }
+  .doctors .section-label { color: var(--gold); }
+  .doctors .section-title { color: var(--white); }
+  .doctors-header { margin-bottom: 3.5rem; }
+  .doctors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .doctor-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px; overflow: hidden;
+    transition: all 0.3s;
+  }
+  .doctor-card:hover {
+    border-color: rgba(26,140,122,0.5); transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+  }
+  .doctor-photo {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--deep), #162d50);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .doctor-photo::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 100%, rgba(26,140,122,0.35), transparent 60%);
+  }
+  .doctor-avatar {
+    width: 90px; height: 90px; border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.8rem; position: relative; z-index: 1;
+  }
+  .doctor-info { padding: 1.5rem; }
+  .doctor-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; color: var(--white); font-weight: 400;
+    margin-bottom: 0.2rem;
+  }
+  .doctor-title { color: var(--teal-light); font-size: 0.8rem; margin-bottom: 0.8rem; }
+  .doctor-bio { color: rgba(255,255,255,0.5); font-size: 0.83rem; line-height: 1.6; margin-bottom: 1rem; }
+  .doctor-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .dtag {
+    background: rgba(26,140,122,0.15); border: 1px solid rgba(26,140,122,0.3);
+    color: rgba(255,255,255,0.7); padding: 0.2rem 0.6rem;
+    border-radius: 50px; font-size: 0.7rem;
+  }
+
+  /* ── LOCATION ── */
+  .location { background: var(--cream); }
+  .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+  .location-card {
+    background: var(--white); border-radius: 18px;
+    padding: 2.5rem; border-top: 4px solid var(--teal);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .location-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--navy);
+  }
+  .loc-detail { display: flex; gap: 1rem; margin-bottom: 1.1rem; align-items: flex-start; }
+  .loc-icon {
+    width: 34px; height: 34px; background: rgba(26,140,122,0.1);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; flex-shrink: 0; color: var(--teal);
+  }
+  .loc-text strong { display: block; font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
+  .loc-text span { font-size: 0.8rem; color: var(--gray); line-height: 1.5; }
+  .map-placeholder {
+    background: linear-gradient(135deg, var(--deep) 0%, #1a3560 100%);
+    border-radius: 18px; overflow: hidden;
+    min-height: 400px; display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .map-placeholder::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(26,140,122,0.2), transparent 60%);
+  }
+  .map-inner { position: relative; z-index: 1; text-align: center; padding: 2rem; }
+  .map-inner .map-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .map-inner h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--white); }
+  .map-inner p { color: rgba(255,255,255,0.55); font-size: 0.85rem; margin-top: 0.5rem; }
+  .map-grid-overlay {
+    position: absolute; inset: 0; opacity: 0.07;
+    background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .map-pin {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px; height: 16px; background: var(--gold);
+    border-radius: 50%; z-index: 2;
+    box-shadow: 0 0 0 6px rgba(201,168,76,0.3), 0 0 0 12px rgba(201,168,76,0.1);
+    animation: mapPulse 2.5s infinite;
+  }
+  @keyframes mapPulse {
+    0%,100% { box-shadow: 0 0 0 6px rgba(201,168,76,0.3), 0 0 0 12px rgba(201,168,76,0.1); }
+    50% { box-shadow: 0 0 0 12px rgba(201,168,76,0.2), 0 0 0 24px rgba(201,168,76,0.05); }
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--white); }
+  .testimonials-header { text-align: center; margin-bottom: 3.5rem; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .testimonial-card {
+    background: var(--light); border-radius: 16px; padding: 2rem;
+    border-bottom: 3px solid var(--teal); position: relative;
+  }
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; color: var(--teal); opacity: 0.2;
+    position: absolute; top: 0.5rem; left: 1.5rem; line-height: 1;
+  }
+  .testimonial-text { color: var(--gray); font-size: 0.9rem; line-height: 1.75; margin-bottom: 1.5rem; }
+  .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+  .author-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--navy));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; color: white;
+  }
+  .author-name { font-weight: 500; font-size: 0.88rem; }
+  .author-role { font-size: 0.76rem; color: var(--gray); }
+  .stars { color: var(--gold); font-size: 0.8rem; margin-bottom: 1rem; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--navy);
+    text-align: center; padding: 7rem 8%;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(26,140,122,0.2), transparent 70%);
+  }
+  .cta-section .section-label { color: var(--gold); }
+  .cta-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    color: var(--white); font-weight: 300; margin-bottom: 1rem;
+    position: relative; z-index: 1;
+  }
+  .cta-section p {
+    color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 2.5rem;
+    line-height: 1.7; position: relative; z-index: 1;
+  }
+  .cta-section .btn-primary { position: relative; z-index: 1; font-size: 1rem; padding: 1rem 2.5rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060f1e;
+    padding: 4rem 8% 2.5rem;
+    color: rgba(255,255,255,0.5);
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    margin-bottom: 3rem; padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-brand .logo { font-size: 1.4rem; display: block; margin-bottom: 0.8rem; }
+  .footer-brand p { font-size: 0.82rem; line-height: 1.7; max-width: 280px; }
+  .footer-col h4 { color: var(--white); font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.2rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.6rem; }
+  .footer-col a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--teal-light); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; }
+  .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  .accreditation-badges { display: flex; gap: 1rem; align-items: center; }
+  .acc-badge {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px; padding: 0.3rem 0.7rem;
+    font-size: 0.7rem; color: rgba(255,255,255,0.4);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 8rem 5% 6rem; }
+    .about, .location-grid { grid-template-columns: 1fr; }
+    .services-grid, .doctors-grid, .testimonials-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Clarity<span>Health</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#doctors">Physicians</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book Appointment</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">CLARITY</div>
+  <div class="hero-left">
+    <div class="hero-badge">Board-Certified Addiction Medicine</div>
+    <h1>Recovery Begins<br>with <em>Compassionate</em><br>Expert Care</h1>
+    <p>At Clarity Health, our addiction medicine specialists provide evidence-based treatment tailored to each patient's unique journey toward lasting recovery.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Schedule a Consultation</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">2,400+</div>
+        <div class="stat-label">Patients Treated</div>
+      </div>
+      <div>
+        <div class="stat-num">94%</div>
+        <div class="stat-label">Recovery Success Rate</div>
+      </div>
+      <div>
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years of Experience</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <h3>Reach Us Today</h3>
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <strong>Main Location</strong>
+          <span>350 E Citrus Ave, Suite 200<br>Redlands, CA 92373</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🕐</div>
+        <div class="info-text">
+          <strong>Office Hours</strong>
+          <span>Mon – Fri: 8:00 AM – 6:00 PM<br>Sat: 9:00 AM – 1:00 PM</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div class="info-text">
+          <strong>Phone</strong>
+          <span>(909) 555-0182</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">✉️</div>
+        <div class="info-text">
+          <strong>Email</strong>
+          <span>care@clarityhealth.com</span>
+        </div>
+      </div>
+      <div class="emergency-bar">
+        <p>24/7 Crisis Helpline</p>
+        <strong>1-800-662-HELP (4357)</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text">
+    <span class="section-label">Who We Are</span>
+    <h2 class="section-title">A New Standard in<br><em>Addiction Medicine</em></h2>
+    <p>Clarity Health was founded on the belief that addiction is a complex, chronic medical condition — not a moral failing. Our multidisciplinary team combines cutting-edge medical care with behavioral health expertise and compassionate support.</p>
+    <p>We serve patients across the Inland Empire with individualized treatment plans, integrating medication-assisted treatment (MAT), psychotherapy, and long-term wellness strategies to build sustainable recovery.</p>
+    <div class="about-pillars">
+      <div class="pillar">
+        <h4>Evidence-Based</h4>
+        <p>All protocols follow SAMHSA and ASAM clinical guidelines.</p>
+      </div>
+      <div class="pillar">
+        <h4>Whole-Person Care</h4>
+        <p>Mental, physical, and social wellbeing addressed together.</p>
+      </div>
+      <div class="pillar">
+        <h4>Confidential</h4>
+        <p>HIPAA-compliant, stigma-free environment at every visit.</p>
+      </div>
+      <div class="pillar">
+        <h4>Accessible</h4>
+        <p>Most major insurance plans accepted; telehealth available.</p>
+      </div>
+    </div>
+  </div>
+  <div class="about-visual">
+    <div class="about-img-block">
+      <div class="about-img-inner">
+        <div class="cross-icon">⚕️</div>
+        <h3>Healing. Hope. Health.</h3>
+        <p>Serving Redlands & the Inland Empire since 2009</p>
+      </div>
+    </div>
+    <div class="about-badge-float">
+      <strong>ABAM</strong>
+      <span>Board Certified</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <span class="section-label">What We Offer</span>
+    <h2 class="section-title">Comprehensive <em>Treatment Services</em></h2>
+    <p>From initial evaluation to long-term recovery support, our services span the full continuum of addiction care.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">💊</div>
+      <h3>Medication-Assisted Treatment</h3>
+      <p>Buprenorphine/naloxone (Suboxone), naltrexone (Vivitrol), and methadone programs for opioid and alcohol use disorders under close physician supervision.</p>
+      <span class="service-tag">MAT Program</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧠</div>
+      <h3>Dual Diagnosis Treatment</h3>
+      <p>Co-occurring mental health conditions including depression, anxiety, PTSD, and bipolar disorder treated alongside addiction by integrated care teams.</p>
+      <span class="service-tag">Integrated Care</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🤝</div>
+      <h3>Outpatient Programs (IOP/OP)</h3>
+      <p>Intensive and standard outpatient programs offering structured group therapy, individual counseling, and medical check-ins without inpatient admission.</p>
+      <span class="service-tag">Flexible Scheduling</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔬</div>
+      <h3>Medical Detoxification</h3>
+      <p>Physician-supervised withdrawal management for alcohol, opioids, benzodiazepines, and stimulants — safely reducing discomfort and medical risk.</p>
+      <span class="service-tag">Safe Detox</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💻</div>
+      <h3>Telehealth Services</h3>
+      <p>Secure video appointments for medication management, therapy, and follow-up consultations — accessible from home throughout California.</p>
+      <span class="service-tag">CA Statewide</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌱</div>
+      <h3>Aftercare & Relapse Prevention</h3>
+      <p>Alumni support groups, ongoing medication management, wellness coaching, and community referrals to maintain long-term sobriety.</p>
+      <span class="service-tag">Long-Term Support</span>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTORS -->
+<section class="doctors" id="doctors">
+  <div class="doctors-header">
+    <span class="section-label">Our Physicians</span>
+    <h2 class="section-title" style="color:var(--white)">Meet Your <em style="color:var(--teal-light)">Care Team</em></h2>
+  </div>
+  <div class="doctors-grid">
+
+    <div class="doctor-card">
+      <div class="doctor-photo">
+        <div class="doctor-avatar">👨‍⚕️</div>
+      </div>
+      <div class="doctor-info">
+        <div class="doctor-name">Dr. Marcus J. Reyes, MD</div>
+        <div class="doctor-title">Medical Director · Board-Certified Addiction Medicine</div>
+        <div class="doctor-bio">Dr. Reyes has over 18 years of experience in addiction medicine and internal medicine. A graduate of UCLA School of Medicine, he completed his addiction medicine fellowship at UC San Francisco and is an active member of ASAM and CSAM.</div>
+        <div class="doctor-tags">
+          <span class="dtag">Opioid Use Disorder</span>
+          <span class="dtag">Alcohol Dependence</span>
+          <span class="dtag">MAT</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="doctor-card">
+      <div class="doctor-photo">
+        <div class="doctor-avatar">👩‍⚕️</div>
+      </div>
+      <div class="doctor-info">
+        <div class="doctor-name">Dr. Priya Anand, MD, MPH</div>
+        <div class="doctor-title">Attending Physician · Psychiatry & Addiction Medicine</div>
+        <div class="doctor-bio">Dr. Anand is dual board-certified in psychiatry and addiction medicine. Trained at Stanford and Johns Hopkins, she specializes in co-occurring disorders and brings a trauma-informed lens to every patient relationship.</div>
+        <div class="doctor-tags">
+          <span class="dtag">Dual Diagnosis</span>
+          <span class="dtag">Trauma-Informed</span>
+          <span class="dtag">Mood Disorders</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="doctor-card">
+      <div class="doctor-photo">
+        <div class="doctor-avatar">👨‍⚕️</div>
+      </div>
+      <div class="doctor-info">
+        <div class="doctor-name">Dr. Thomas W. Chen, DO</div>
+        <div class="doctor-title">Associate Physician · Family & Addiction Medicine</div>
+        <div class="doctor-bio">Dr. Chen brings a whole-person, osteopathic approach to addiction medicine. A graduate of Western University of Health Sciences, he focuses on long-term recovery maintenance and patient education in the Inland Empire community.</div>
+        <div class="doctor-tags">
+          <span class="dtag">Stimulant Disorders</span>
+          <span class="dtag">Wellness</span>
+          <span class="dtag">Telehealth</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="doctor-card">
+      <div class="doctor-photo">
+        <div class="doctor-avatar">👩‍⚕️</div>
+      </div>
+      <div class="doctor-info">
+        <div class="doctor-name">Dr. Renée L. Fontaine, MD</div>
+        <div class="doctor-title">Addiction Medicine Fellow · Loma Linda University</div>
+        <div class="doctor-bio">Dr. Fontaine completed her residency in internal medicine at Loma Linda University Medical Center and is currently completing her addiction medicine fellowship. She has a special interest in adolescent substance use and prevention.</div>
+        <div class="doctor-tags">
+          <span class="dtag">Adolescents</span>
+          <span class="dtag">Prevention</span>
+          <span class="dtag">Buprenorphine</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="doctor-card">
+      <div class="doctor-photo">
+        <div class="doctor-avatar">👨‍⚕️</div>
+      </div>
+      <div class="doctor-info">
+        <div class="doctor-name">Dr. Samuel O. Adeyemi, PhD, LMFT</div>
+        <div class="doctor-title">Director of Behavioral Health</div>
+        <div class="doctor-bio">Dr. Adeyemi leads our behavioral health division with a doctorate in clinical psychology and licensure as a marriage and family therapist. He oversees group therapy, CBT, and motivational interviewing programs across all levels of care.</div>
+        <div class="doctor-tags">
+          <span class="dtag">CBT</span>
+          <span class="dtag">Motivational Interviewing</span>
+          <span class="dtag">Group Therapy</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="doctor-card">
+      <div class="doctor-photo">
+        <div class="doctor-avatar">👩‍⚕️</div>
+      </div>
+      <div class="doctor-info">
+        <div class="doctor-name">Maria G. Torres, PMHNP-BC</div>
+        <div class="doctor-title">Psychiatric Nurse Practitioner</div>
+        <div class="doctor-bio">Maria is a board-certified psychiatric mental health nurse practitioner with a decade of experience in addiction and mental health settings. She manages medication protocols and patient education for our telehealth and outpatient programs.</div>
+        <div class="doctor-tags">
+          <span class="dtag">Medication Mgmt</span>
+          <span class="dtag">Telehealth</span>
+          <span class="dtag">Patient Education</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location" id="location">
+  <span class="section-label">Find Us</span>
+  <h2 class="section-title">Our <em>Locations</em></h2>
+  <div class="location-grid">
+    <div>
+      <div class="location-card" style="margin-bottom:1.5rem">
+        <h3>Redlands Main Clinic</h3>
+        <div class="loc-detail">
+          <div class="loc-icon">📍</div>
+          <div class="loc-text">
+            <strong>Address</strong>
+            <span>350 E Citrus Ave, Suite 200<br>Redlands, CA 92373</span>
+          </div>
+        </div>
+        <div class="loc-detail">
+          <div class="loc-icon">🕐</div>
+          <div class="loc-text">
+            <strong>Hours</strong>
+            <span>Mon – Fri: 8:00 AM – 6:00 PM<br>Saturday: 9:00 AM – 1:00 PM<br>Sunday: Closed</span>
+          </div>
+        </div>
+        <div class="loc-detail">
+          <div class="loc-icon">📞</div>
+          <div class="loc-text">
+            <strong>Phone</strong>
+            <span>(909) 555-0182</span>
+          </div>
+        </div>
+        <div class="loc-detail">
+          <div class="loc-icon">🚌</div>
+          <div class="loc-text">
+            <strong>Transit & Parking</strong>
+            <span>Free parking on-site · Near Omnitrans Route 8 stop</span>
+          </div>
+        </div>
+      </div>
+      <div class="location-card">
+        <h3>San Bernardino Satellite Office</h3>
+        <div class="loc-detail">
+          <div class="loc-icon">📍</div>
+          <div class="loc-text">
+            <strong>Address</strong>
+            <span>1735 Medical Center Dr, Suite 110<br>San Bernardino, CA 92411</span>
+          </div>
+        </div>
+        <div class="loc-detail">
+          <div class="loc-icon">🕐</div>
+          <div class="loc-text">
+            <strong>Hours</strong>
+            <span>Tues & Thurs: 10:00 AM – 5:00 PM<br>By appointment only</span>
+          </div>
+        </div>
+        <div class="loc-detail">
+          <div class="loc-icon">📞</div>
+          <div class="loc-text">
+            <strong>Phone</strong>
+            <span>(909) 555-0247</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="map-placeholder">
+      <div class="map-grid-overlay"></div>
+      <div class="map-pin"></div>
+      <div class="map-inner">
+        <div class="map-icon">🗺️</div>
+        <h4>Redlands, CA</h4>
+        <p>350 E Citrus Ave, Suite 200<br>Redlands, CA 92373</p>
+        <br>
+        <a href="https://maps.google.com/?q=350+E+Citrus+Ave+Redlands+CA" target="_blank" style="background:var(--teal);color:white;padding:0.7rem 1.5rem;border-radius:6px;text-decoration:none;font-size:0.85rem;display:inline-block;margin-top:1rem;">Open in Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="contact">
+  <div class="testimonials-header">
+    <span class="section-label">Patient Stories</span>
+    <h2 class="section-title">Lives <em>Changed</em></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">Dr. Reyes and his team gave me my life back. After years of struggling with opioid dependence, I finally found a practice that treated me with dignity. I am now three years sober and couldn't be more grateful.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">J</div>
+        <div>
+          <div class="author-name">James T.</div>
+          <div class="author-role">Patient since 2021 · Redlands, CA</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">Dr. Anand truly understands how mental health and addiction are intertwined. She took my anxiety seriously from day one and worked with me on both issues simultaneously. The care I've received here is unlike anything else.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <div class="author-name">Sandra M.</div>
+          <div class="author-role">Patient since 2022 · San Bernardino, CA</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">The telehealth option made it possible for me to access expert care without disrupting my work schedule. Maria is incredibly thorough and responsive. I finally feel supported on this journey.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">R</div>
+        <div>
+          <div class="author-name">Robert K.</div>
+          <div class="author-role">Telehealth Patient · Riverside, CA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <span class="section-label">Take the First Step</span>
+  <h2>You Deserve a Path<br>Forward. We're Here.</h2>
+  <p>Recovery is possible. Contact our compassionate team today for a confidential consultation — no judgment, just help.</p>
+  <a href="tel:9095550182" class="btn-primary">📞 Call (909) 555-0182</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">Clarity<span style="color:var(--gold)">Health</span></div>
+      <p>Board-certified addiction medicine serving Redlands and the greater Inland Empire since 2009. We believe recovery is possible for everyone.</p>
+      <div class="accreditation-badges" style="margin-top:1.2rem">
+        <div class="acc-badge">CARF Accredited</div>
+        <div class="acc-badge">ASAM Member</div>
+        <div class="acc-badge">SAMHSA Certified</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Medication-Assisted Treatment</a></li>
+        <li><a href="#">Dual Diagnosis</a></li>
+        <li><a href="#">Medical Detox</a></li>
+        <li><a href="#">Intensive Outpatient</a></li>
+        <li><a href="#">Telehealth</a></li>
+        <li><a href="#">Aftercare</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Physicians</h4>
+      <ul>
+        <li><a href="#">Dr. Marcus Reyes, MD</a></li>
+        <li><a href="#">Dr. Priya Anand, MD</a></li>
+        <li><a href="#">Dr. Thomas Chen, DO</a></li>
+        <li><a href="#">Dr. Renée Fontaine, MD</a></li>
+        <li><a href="#">Dr. Samuel Adeyemi, PhD</a></li>
+        <li><a href="#">Maria Torres, PMHNP</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">(909) 555-0182</a></li>
+        <li><a href="#">care@clarityhealth.com</a></li>
+        <li><a href="#">350 E Citrus Ave, Ste 200</a></li>
+        <li><a href="#">Redlands, CA 92373</a></li>
+        <li style="margin-top:0.8rem"><a href="#">Patient Portal</a></li>
+        <li><a href="#">Insurance & Billing</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Clarity Health Addiction Medicine. All rights reserved.</span>
+    <div style="display:flex;gap:1.5rem">
+      <a href="#">Privacy Policy</a>
+      <a href="#">HIPAA Notice</a>
+      <a href="#">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
