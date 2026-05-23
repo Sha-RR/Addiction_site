@@ -4,736 +4,1145 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clarity Health — Addiction Medicine</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Tenor+Sans&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0a1628;
-    --deep: #0e1f3a;
-    --teal: #1a8c7a;
-    --teal-light: #22b09a;
-    --gold: #c9a84c;
-    --cream: #f5f0e8;
-    --white: #ffffff;
-    --gray: #6b7280;
-    --light: #f8f9fb;
-  }
+:root {
+  --ink: #08111f;
+  --deep: #0b1929;
+  --midnight: #0f2035;
+  --teal: #0fa990;
+  --teal2: #12c9ab;
+  --gold: #d4a853;
+  --gold2: #f0cc7a;
+  --rose: #c45b6a;
+  --cream: #f7f2e9;
+  --offwhite: #eee9df;
+  --muted: rgba(255,255,255,0.45);
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.09);
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
-  html { scroll-behavior: smooth; }
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--ink);
+  color: #fff;
+  overflow-x: hidden;
+  cursor: none;
+}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--white);
-    color: var(--navy);
-    overflow-x: hidden;
-  }
+/* ── CUSTOM CURSOR ── */
+#cursor {
+  position: fixed; top: 0; left: 0; z-index: 9999;
+  pointer-events: none;
+}
+.cursor-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--gold); position: absolute;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s;
+}
+.cursor-ring {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(212,168,83,0.5);
+  position: absolute; transform: translate(-50%,-50%);
+  transition: all 0.18s ease;
+}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 5%;
-    background: rgba(10,22,40,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-  }
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; font-weight: 600;
-    color: var(--white); letter-spacing: 0.04em;
-  }
-  .logo span { color: var(--gold); }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    color: rgba(255,255,255,0.75); text-decoration: none;
-    font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold); }
-  .nav-cta {
-    background: var(--teal); color: var(--white);
-    padding: 0.6rem 1.4rem; border-radius: 4px;
-    font-size: 0.85rem; letter-spacing: 0.04em; text-decoration: none;
-    transition: background 0.2s;
-  }
-  .nav-cta:hover { background: var(--teal-light); }
+/* ── CANVAS BACKGROUND ── */
+#bg-canvas {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+}
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    background: var(--navy);
-    display: grid; grid-template-columns: 1fr 1fr;
-    align-items: center;
-    position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(26,140,122,0.18), transparent 70%);
-  }
-  .hero-bg-text {
-    position: absolute; right: -2%; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(8rem, 16vw, 18rem);
-    font-weight: 300; color: rgba(255,255,255,0.03);
-    line-height: 1; pointer-events: none; user-select: none;
-    white-space: nowrap;
-  }
-  .hero-left {
-    padding: 8rem 5% 6rem 8%;
-    position: relative; z-index: 2;
-  }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.35);
-    color: var(--gold); padding: 0.4rem 1rem; border-radius: 50px;
-    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-    margin-bottom: 2rem;
-  }
-  .hero-badge::before {
-    content: ''; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--gold); animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%,100% { opacity: 1; } 50% { opacity: 0.3; }
-  }
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.8rem, 5vw, 4.5rem);
-    font-weight: 300; line-height: 1.1;
-    color: var(--white); margin-bottom: 1.5rem;
-  }
-  .hero h1 em { font-style: italic; color: var(--teal-light); }
-  .hero p {
-    color: rgba(255,255,255,0.65);
-    font-size: 1.05rem; line-height: 1.7;
-    max-width: 480px; margin-bottom: 2.5rem;
-  }
-  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--teal); color: var(--white);
-    padding: 0.9rem 2rem; border-radius: 6px;
-    font-size: 0.9rem; letter-spacing: 0.04em; text-decoration: none;
-    transition: all 0.25s; display: inline-block;
-  }
-  .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,140,122,0.4); }
-  .btn-outline {
-    border: 1px solid rgba(255,255,255,0.3); color: var(--white);
-    padding: 0.9rem 2rem; border-radius: 6px;
-    font-size: 0.9rem; letter-spacing: 0.04em; text-decoration: none;
-    transition: all 0.25s; display: inline-block;
-  }
-  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
-  .hero-stats {
-    display: flex; gap: 2.5rem; margin-top: 3.5rem;
-    padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.1);
-  }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem; font-weight: 600;
-    color: var(--gold); line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.75rem; color: rgba(255,255,255,0.5);
-    letter-spacing: 0.05em; text-transform: uppercase;
-    margin-top: 0.3rem;
-  }
-  .hero-right {
-    position: relative; z-index: 2;
-    display: flex; align-items: center; justify-content: center;
-    padding: 8rem 8% 6rem 2%;
-  }
-  .hero-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 20px; padding: 2.5rem;
-    width: 100%; max-width: 380px;
-  }
-  .hero-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem; color: var(--white);
-    margin-bottom: 1.5rem;
-  }
-  .info-item {
-    display: flex; align-items: flex-start; gap: 1rem;
-    margin-bottom: 1.2rem;
-  }
-  .info-icon {
-    width: 38px; height: 38px; border-radius: 8px;
-    background: rgba(26,140,122,0.2); border: 1px solid rgba(26,140,122,0.4);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; flex-shrink: 0;
-  }
-  .info-text strong { display: block; color: var(--white); font-size: 0.9rem; margin-bottom: 0.15rem; }
-  .info-text span { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
-  .emergency-bar {
-    margin-top: 1.5rem; padding: 1rem;
-    background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 10px; text-align: center;
-  }
-  .emergency-bar p { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-bottom: 0.2rem; }
-  .emergency-bar strong { color: var(--gold); font-size: 1.1rem; letter-spacing: 0.05em; }
+/* ── NOISE OVERLAY ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; opacity: 0.6;
+}
 
-  /* ── SECTION WRAPPER ── */
-  section { padding: 6rem 8%; }
-  .section-label {
-    display: inline-block;
-    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--teal); margin-bottom: 0.8rem;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400;
-    line-height: 1.15; color: var(--navy);
-  }
-  .section-title em { font-style: italic; color: var(--teal); }
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.6rem 5%;
+  transition: all 0.4s;
+}
+nav.scrolled {
+  background: rgba(8,17,31,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 1rem 5%;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.55rem; font-weight: 400; letter-spacing: 0.06em;
+  color: #fff; text-decoration: none;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.nav-logo .logo-accent {
+  display: inline-block; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--gold);
+  margin-bottom: 0.4rem;
+}
+.nav-center {
+  display: flex; gap: 2.5rem; list-style: none;
+  position: absolute; left: 50%; transform: translateX(-50%);
+}
+.nav-center a {
+  font-family: 'Tenor Sans'; font-size: 0.7rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--muted); text-decoration: none;
+  transition: color 0.25s; position: relative;
+}
+.nav-center a::after {
+  content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+  height: 1px; background: var(--gold); transform: scaleX(0);
+  transition: transform 0.3s; transform-origin: left;
+}
+.nav-center a:hover { color: #fff; }
+.nav-center a:hover::after { transform: scaleX(1); }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.nav-phone { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.04em; }
+.nav-btn {
+  font-family: 'Tenor Sans'; font-size: 0.68rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink);
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  padding: 0.65rem 1.5rem; border-radius: 2px;
+  text-decoration: none; transition: all 0.25s;
+}
+.nav-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,168,83,0.4); }
 
-  /* ── ABOUT ── */
-  .about {
-    background: var(--light);
-    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
-  }
-  .about-text p {
-    color: var(--gray); line-height: 1.8; margin-top: 1.2rem; font-size: 1rem;
-  }
-  .about-pillars {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2.5rem;
-  }
-  .pillar {
-    background: var(--white); border-radius: 12px;
-    padding: 1.3rem; border-left: 3px solid var(--teal);
-  }
-  .pillar h4 { font-size: 0.9rem; font-weight: 500; color: var(--navy); margin-bottom: 0.3rem; }
-  .pillar p { font-size: 0.8rem; color: var(--gray); line-height: 1.5; }
-  .about-visual {
-    position: relative;
-  }
-  .about-img-block {
-    background: linear-gradient(135deg, var(--deep), var(--navy));
-    border-radius: 20px; overflow: hidden;
-    aspect-ratio: 4/5; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    position: relative;
-  }
-  .about-img-block::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(circle at 30% 70%, rgba(26,140,122,0.3), transparent 60%);
-  }
-  .about-img-inner {
-    position: relative; z-index: 1; text-align: center; padding: 2rem;
-  }
-  .cross-icon {
-    font-size: 4rem; margin-bottom: 1rem; opacity: 0.9;
-  }
-  .about-img-inner h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem; color: var(--white); font-weight: 300;
-  }
-  .about-img-inner p { color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 0.5rem; }
-  .about-badge-float {
-    position: absolute; bottom: -1.5rem; right: -1.5rem;
-    background: var(--gold); color: var(--navy);
-    border-radius: 14px; padding: 1.2rem 1.5rem;
-    text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  }
-  .about-badge-float strong { display: block; font-size: 2rem; font-family: 'Cormorant Garamond', serif; }
-  .about-badge-float span { font-size: 0.72rem; letter-spacing: 0.05em; }
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; position: relative;
+  display: flex; align-items: center;
+  padding: 10rem 7% 6rem;
+  overflow: hidden;
+}
 
-  /* ── SERVICES ── */
-  .services { background: var(--white); }
-  .services-header { text-align: center; margin-bottom: 3.5rem; }
-  .services-header p { color: var(--gray); max-width: 540px; margin: 1rem auto 0; line-height: 1.7; }
-  .services-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-  }
-  .service-card {
-    border: 1px solid #e8ecf0; border-radius: 16px; padding: 2rem;
-    transition: all 0.3s; position: relative; overflow: hidden;
-    background: var(--white);
-  }
-  .service-card::before {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(26,140,122,0.04), transparent);
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .service-card:hover { border-color: var(--teal); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,140,122,0.1); }
-  .service-card:hover::before { opacity: 1; }
-  .service-icon {
-    width: 52px; height: 52px; border-radius: 12px;
-    background: rgba(26,140,122,0.1); display: flex;
-    align-items: center; justify-content: center;
-    font-size: 1.5rem; margin-bottom: 1.2rem;
-  }
-  .service-card h3 { font-size: 1.05rem; font-weight: 500; margin-bottom: 0.6rem; }
-  .service-card p { color: var(--gray); font-size: 0.87rem; line-height: 1.65; }
-  .service-tag {
-    display: inline-block; margin-top: 1rem;
-    background: var(--light); color: var(--teal);
-    padding: 0.25rem 0.7rem; border-radius: 50px;
-    font-size: 0.72rem; letter-spacing: 0.04em;
-  }
+/* orbs */
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(90px); pointer-events: none;
+}
+.orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(15,169,144,0.18), transparent 70%);
+  top: -100px; right: -100px;
+  animation: orbFloat1 12s ease-in-out infinite;
+}
+.orb-2 {
+  width: 450px; height: 450px;
+  background: radial-gradient(circle, rgba(212,168,83,0.12), transparent 70%);
+  bottom: -50px; left: 10%;
+  animation: orbFloat2 15s ease-in-out infinite;
+}
+.orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(196,91,106,0.1), transparent 70%);
+  top: 40%; left: 45%;
+  animation: orbFloat1 18s ease-in-out infinite reverse;
+}
+@keyframes orbFloat1 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-40px, 40px) scale(1.08); }
+}
+@keyframes orbFloat2 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(50px, -30px) scale(1.1); }
+}
 
-  /* ── DOCTORS ── */
-  .doctors { background: var(--navy); }
-  .doctors .section-label { color: var(--gold); }
-  .doctors .section-title { color: var(--white); }
-  .doctors-header { margin-bottom: 3.5rem; }
-  .doctors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .doctor-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 18px; overflow: hidden;
-    transition: all 0.3s;
-  }
-  .doctor-card:hover {
-    border-color: rgba(26,140,122,0.5); transform: translateY(-5px);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.3);
-  }
-  .doctor-photo {
-    aspect-ratio: 4/3;
-    background: linear-gradient(135deg, var(--deep), #162d50);
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-  }
-  .doctor-photo::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(circle at 50% 100%, rgba(26,140,122,0.35), transparent 60%);
-  }
-  .doctor-avatar {
-    width: 90px; height: 90px; border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-    border: 2px solid rgba(255,255,255,0.2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2.8rem; position: relative; z-index: 1;
-  }
-  .doctor-info { padding: 1.5rem; }
-  .doctor-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem; color: var(--white); font-weight: 400;
-    margin-bottom: 0.2rem;
-  }
-  .doctor-title { color: var(--teal-light); font-size: 0.8rem; margin-bottom: 0.8rem; }
-  .doctor-bio { color: rgba(255,255,255,0.5); font-size: 0.83rem; line-height: 1.6; margin-bottom: 1rem; }
-  .doctor-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .dtag {
-    background: rgba(26,140,122,0.15); border: 1px solid rgba(26,140,122,0.3);
-    color: rgba(255,255,255,0.7); padding: 0.2rem 0.6rem;
-    border-radius: 50px; font-size: 0.7rem;
-  }
+/* decorative line art */
+.hero-line-art {
+  position: absolute; right: 5%; top: 50%;
+  transform: translateY(-50%);
+  width: 480px; height: 480px; opacity: 0.06;
+  pointer-events: none;
+}
 
-  /* ── LOCATION ── */
-  .location { background: var(--cream); }
-  .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
-  .location-card {
-    background: var(--white); border-radius: 18px;
-    padding: 2.5rem; border-top: 4px solid var(--teal);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  }
-  .location-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--navy);
-  }
-  .loc-detail { display: flex; gap: 1rem; margin-bottom: 1.1rem; align-items: flex-start; }
-  .loc-icon {
-    width: 34px; height: 34px; background: rgba(26,140,122,0.1);
-    border-radius: 8px; display: flex; align-items: center; justify-content: center;
-    font-size: 0.9rem; flex-shrink: 0; color: var(--teal);
-  }
-  .loc-text strong { display: block; font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
-  .loc-text span { font-size: 0.8rem; color: var(--gray); line-height: 1.5; }
-  .map-placeholder {
-    background: linear-gradient(135deg, var(--deep) 0%, #1a3560 100%);
-    border-radius: 18px; overflow: hidden;
-    min-height: 400px; display: flex; align-items: center; justify-content: center;
-    position: relative;
-  }
-  .map-placeholder::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(26,140,122,0.2), transparent 60%);
-  }
-  .map-inner { position: relative; z-index: 1; text-align: center; padding: 2rem; }
-  .map-inner .map-icon { font-size: 3rem; margin-bottom: 1rem; }
-  .map-inner h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--white); }
-  .map-inner p { color: rgba(255,255,255,0.55); font-size: 0.85rem; margin-top: 0.5rem; }
-  .map-grid-overlay {
-    position: absolute; inset: 0; opacity: 0.07;
-    background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-  .map-pin {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 16px; height: 16px; background: var(--gold);
-    border-radius: 50%; z-index: 2;
-    box-shadow: 0 0 0 6px rgba(201,168,76,0.3), 0 0 0 12px rgba(201,168,76,0.1);
-    animation: mapPulse 2.5s infinite;
-  }
-  @keyframes mapPulse {
-    0%,100% { box-shadow: 0 0 0 6px rgba(201,168,76,0.3), 0 0 0 12px rgba(201,168,76,0.1); }
-    50% { box-shadow: 0 0 0 12px rgba(201,168,76,0.2), 0 0 0 24px rgba(201,168,76,0.05); }
-  }
+.hero-content { position: relative; z-index: 2; max-width: 780px; }
+.hero-kicker {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 2.2rem;
+}
+.kicker-line { width: 48px; height: 1px; background: var(--gold); }
+.kicker-text {
+  font-family: 'Tenor Sans'; font-size: 0.7rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gold);
+}
 
-  /* ── TESTIMONIALS ── */
-  .testimonials { background: var(--white); }
-  .testimonials-header { text-align: center; margin-bottom: 3.5rem; }
-  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .testimonial-card {
-    background: var(--light); border-radius: 16px; padding: 2rem;
-    border-bottom: 3px solid var(--teal); position: relative;
-  }
-  .quote-mark {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 5rem; color: var(--teal); opacity: 0.2;
-    position: absolute; top: 0.5rem; left: 1.5rem; line-height: 1;
-  }
-  .testimonial-text { color: var(--gray); font-size: 0.9rem; line-height: 1.75; margin-bottom: 1.5rem; }
-  .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
-  .author-avatar {
-    width: 40px; height: 40px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--teal), var(--navy));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem; color: white;
-  }
-  .author-name { font-weight: 500; font-size: 0.88rem; }
-  .author-role { font-size: 0.76rem; color: var(--gray); }
-  .stars { color: var(--gold); font-size: 0.8rem; margin-bottom: 1rem; }
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  font-weight: 400; line-height: 1.0;
+  letter-spacing: -0.01em;
+}
+.hero h1 .line { display: block; overflow: hidden; }
+.hero h1 .line span {
+  display: block;
+  animation: revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero h1 .line:nth-child(2) span { animation-delay: 0.12s; }
+.hero h1 .line:nth-child(3) span { animation-delay: 0.24s; }
+.hero h1 em { font-style: italic; color: var(--teal2); }
+@keyframes revealUp {
+  from { transform: translateY(105%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
 
-  /* ── CTA ── */
-  .cta-section {
-    background: var(--navy);
-    text-align: center; padding: 7rem 8%;
-    position: relative; overflow: hidden;
-  }
-  .cta-section::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(26,140,122,0.2), transparent 70%);
-  }
-  .cta-section .section-label { color: var(--gold); }
-  .cta-section h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 4vw, 3.5rem);
-    color: var(--white); font-weight: 300; margin-bottom: 1rem;
-    position: relative; z-index: 1;
-  }
-  .cta-section p {
-    color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 2.5rem;
-    line-height: 1.7; position: relative; z-index: 1;
-  }
-  .cta-section .btn-primary { position: relative; z-index: 1; font-size: 1rem; padding: 1rem 2.5rem; }
+.hero-sub {
+  margin-top: 2.2rem;
+  font-size: 1.05rem; font-weight: 200; line-height: 1.8;
+  color: rgba(255,255,255,0.6); max-width: 520px;
+  animation: fadeIn 1.2s 0.5s both;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  /* ── FOOTER ── */
-  footer {
-    background: #060f1e;
-    padding: 4rem 8% 2.5rem;
-    color: rgba(255,255,255,0.5);
-  }
-  .footer-top {
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
-    margin-bottom: 3rem; padding-bottom: 3rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .footer-brand .logo { font-size: 1.4rem; display: block; margin-bottom: 0.8rem; }
-  .footer-brand p { font-size: 0.82rem; line-height: 1.7; max-width: 280px; }
-  .footer-col h4 { color: var(--white); font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.2rem; }
-  .footer-col ul { list-style: none; }
-  .footer-col li { margin-bottom: 0.6rem; }
-  .footer-col a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
-  .footer-col a:hover { color: var(--teal-light); }
-  .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; }
-  .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
-  .accreditation-badges { display: flex; gap: 1rem; align-items: center; }
-  .acc-badge {
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 6px; padding: 0.3rem 0.7rem;
-    font-size: 0.7rem; color: rgba(255,255,255,0.4);
-    letter-spacing: 0.05em;
-  }
+.hero-actions {
+  display: flex; align-items: center; gap: 2rem;
+  margin-top: 3rem;
+  animation: fadeIn 1.2s 0.7s both;
+}
+.btn-gold {
+  font-family: 'Tenor Sans'; font-size: 0.72rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink);
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  padding: 1rem 2.5rem; border-radius: 2px; text-decoration: none;
+  transition: all 0.3s; position: relative; overflow: hidden;
+}
+.btn-gold::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--gold2), var(--gold));
+  opacity: 0; transition: opacity 0.3s;
+}
+.btn-gold:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(212,168,83,0.45); }
+.btn-gold:hover::before { opacity: 1; }
+.btn-gold span { position: relative; z-index: 1; }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-right { display: none; }
-    .hero-left { padding: 8rem 5% 6rem; }
-    .about, .location-grid { grid-template-columns: 1fr; }
-    .services-grid, .doctors-grid, .testimonials-grid { grid-template-columns: 1fr; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
-    .nav-links { display: none; }
-  }
+.btn-ghost {
+  font-family: 'Tenor Sans'; font-size: 0.72rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(255,255,255,0.7);
+  text-decoration: none; display: flex; align-items: center; gap: 0.7rem;
+  transition: color 0.25s;
+}
+.btn-ghost:hover { color: #fff; }
+.btn-ghost-arrow {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; transition: all 0.3s;
+}
+.btn-ghost:hover .btn-ghost-arrow {
+  background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5);
+  transform: translateX(4px);
+}
+
+.hero-stats {
+  display: flex; gap: 0; margin-top: 4.5rem;
+  border-top: 1px solid var(--glass-border);
+  padding-top: 2.5rem;
+  animation: fadeIn 1.2s 0.9s both;
+}
+.hstat {
+  flex: 1; padding-right: 2rem; border-right: 1px solid var(--glass-border);
+  margin-right: 2rem;
+}
+.hstat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+.hstat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem; font-weight: 500;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; line-height: 1;
+}
+.hstat-label {
+  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-top: 0.4rem;
+}
+
+/* ── SCROLL INDICATOR ── */
+.scroll-indicator {
+  position: absolute; bottom: 2.5rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  animation: fadeIn 1.5s 1.2s both;
+}
+.scroll-line {
+  width: 1px; height: 60px; background: linear-gradient(to bottom, transparent, var(--gold));
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+.scroll-text {
+  font-family: 'Tenor Sans'; font-size: 0.6rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  position: relative; z-index: 2;
+  overflow: hidden; padding: 1.5rem 0;
+  background: linear-gradient(90deg, var(--ink), rgba(15,169,144,0.06) 50%, var(--ink));
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+}
+.marquee-track {
+  display: flex; gap: 0; white-space: nowrap;
+  animation: marquee 28s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 1.5rem;
+  padding: 0 2.5rem;
+  font-family: 'Tenor Sans'; font-size: 0.68rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(255,255,255,0.35);
+}
+.marquee-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0.7; }
+
+/* ── ABOUT (SPLIT) ── */
+.about-section {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 90vh;
+}
+.about-left {
+  background: var(--cream); color: var(--ink);
+  padding: 8rem 6% 8rem 8%;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.about-left::before {
+  content: '';
+  position: absolute; top: -100px; right: -100px;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(15,169,144,0.08), transparent 70%);
+}
+.about-label {
+  display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem;
+}
+.about-label-line { width: 32px; height: 1px; background: var(--teal); }
+.about-label-text {
+  font-family: 'Tenor Sans'; font-size: 0.68rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--teal);
+}
+.about-left h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  font-weight: 400; line-height: 1.15;
+  color: var(--ink); margin-bottom: 1.8rem;
+}
+.about-left h2 em { font-style: italic; color: var(--teal); }
+.about-left p {
+  font-size: 0.96rem; line-height: 1.85; color: #4a5568;
+  margin-bottom: 1.2rem; font-weight: 300;
+}
+.about-values {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  margin-top: 2.5rem; background: #d8d0c4; border: 1px solid #d8d0c4;
+  border-radius: 12px; overflow: hidden;
+}
+.aval {
+  background: var(--offwhite); padding: 1.3rem;
+}
+.aval-icon { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.aval h4 { font-size: 0.85rem; font-weight: 500; color: var(--ink); margin-bottom: 0.25rem; }
+.aval p { font-size: 0.77rem; color: #6b7280; line-height: 1.5; }
+
+.about-right {
+  background: var(--midnight);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 4rem;
+}
+.about-right-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(15,169,144,0.18), transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 100%, rgba(212,168,83,0.1), transparent 60%);
+}
+.about-right-grid {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.about-big-num {
+  position: absolute; top: 3rem; left: 4rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 10rem; font-weight: 700; line-height: 1;
+  color: rgba(255,255,255,0.03); pointer-events: none;
+}
+.about-badges {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.abadge {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 14px; padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+.abadge:hover { border-color: rgba(15,169,144,0.4); background: rgba(15,169,144,0.06); transform: translateY(-4px); }
+.abadge-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem; font-weight: 500;
+  background: linear-gradient(135deg, var(--teal), var(--teal2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.abadge-label { font-size: 0.72rem; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; margin-top: 0.2rem; }
+.about-cert {
+  position: relative; z-index: 2;
+  display: flex; gap: 0.8rem; flex-wrap: wrap;
+}
+.cert-tag {
+  background: rgba(212,168,83,0.1); border: 1px solid rgba(212,168,83,0.25);
+  color: var(--gold); padding: 0.35rem 0.9rem;
+  border-radius: 50px; font-size: 0.68rem; letter-spacing: 0.08em;
+}
+
+/* ── SERVICES ── */
+.services-section {
+  position: relative; z-index: 2;
+  padding: 9rem 7%;
+  background: var(--deep);
+}
+.section-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 4.5rem;
+}
+.section-label-wrap { display: flex; flex-direction: column; }
+.sec-kicker {
+  display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;
+}
+.sec-kicker-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+.sec-kicker-text {
+  font-family: 'Tenor Sans'; font-size: 0.68rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400;
+  line-height: 1.15;
+}
+.sec-title em { font-style: italic; color: var(--teal2); }
+.section-header p {
+  max-width: 340px; font-size: 0.88rem; line-height: 1.75;
+  color: rgba(255,255,255,0.45); font-weight: 200;
+  text-align: right;
+}
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
+  background: var(--glass-border); border: 1px solid var(--glass-border);
+  border-radius: 20px; overflow: hidden;
+}
+.svc-card {
+  background: var(--ink); padding: 2.5rem;
+  position: relative; overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  cursor: default;
+}
+.svc-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(15,169,144,0.07), transparent 60%);
+  opacity: 0; transition: opacity 0.4s;
+}
+.svc-card:hover { background: #0e1e35; }
+.svc-card:hover::before { opacity: 1; }
+.svc-num {
+  font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700;
+  color: rgba(255,255,255,0.04); position: absolute;
+  top: 1rem; right: 1.5rem; line-height: 1;
+}
+.svc-icon-wrap {
+  width: 52px; height: 52px; border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; margin-bottom: 1.5rem;
+  transition: border-color 0.3s;
+}
+.svc-card:hover .svc-icon-wrap { border-color: rgba(15,169,144,0.5); }
+.svc-card h3 {
+  font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 400;
+  margin-bottom: 0.8rem; color: #fff;
+}
+.svc-card p { font-size: 0.83rem; line-height: 1.7; color: rgba(255,255,255,0.45); font-weight: 200; }
+.svc-link {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  margin-top: 1.5rem; font-size: 0.72rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--teal); text-decoration: none;
+  font-family: 'Tenor Sans'; transition: gap 0.25s;
+}
+.svc-link:hover { gap: 0.8rem; }
+
+/* ── DOCTORS ── */
+.doctors-section {
+  position: relative; z-index: 2;
+  padding: 9rem 7%;
+  background: var(--ink);
+}
+.doctors-header { margin-bottom: 4rem; }
+.doctors-scroll {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.doc-card {
+  position: relative; border-radius: 18px; overflow: hidden;
+  background: var(--midnight);
+  border: 1px solid var(--glass-border);
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.doc-card:hover {
+  border-color: rgba(15,169,144,0.35);
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(15,169,144,0.1);
+}
+.doc-photo-area {
+  height: 200px; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #0e1f3a, #162d50);
+}
+.doc-photo-area::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, var(--midnight));
+}
+.doc-photo-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 100%, rgba(15,169,144,0.22), transparent 60%);
+}
+.doc-initials {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-60%);
+  width: 80px; height: 80px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-size: 1.6rem;
+  color: rgba(255,255,255,0.7); z-index: 1;
+}
+.doc-specialty-badge {
+  position: absolute; bottom: 1rem; left: 1rem; z-index: 2;
+  background: rgba(15,169,144,0.15); border: 1px solid rgba(15,169,144,0.3);
+  color: var(--teal2); padding: 0.2rem 0.7rem; border-radius: 50px;
+  font-size: 0.65rem; letter-spacing: 0.08em;
+}
+.doc-body { padding: 1.5rem; }
+.doc-name {
+  font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 400;
+  color: #fff; margin-bottom: 0.15rem;
+}
+.doc-title { font-size: 0.72rem; color: var(--gold); letter-spacing: 0.04em; margin-bottom: 0.9rem; }
+.doc-bio { font-size: 0.8rem; line-height: 1.65; color: rgba(255,255,255,0.45); font-weight: 200; margin-bottom: 1.2rem; }
+.doc-expertise { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.exp-tag {
+  font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 50px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border);
+  color: rgba(255,255,255,0.5);
+}
+
+/* ── LOCATIONS ── */
+.locations-section {
+  position: relative; z-index: 2;
+  background: var(--cream); color: var(--ink);
+  padding: 9rem 7%;
+}
+.locations-section .sec-kicker-text { color: var(--teal); }
+.locations-section .sec-kicker-dot { background: var(--teal); }
+.locations-section .sec-title { color: var(--ink); }
+.locations-section .sec-title em { color: var(--teal); }
+.locations-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 2rem; margin-top: 4rem;
+}
+.loc-cards { display: flex; flex-direction: column; gap: 1.5rem; }
+.loc-card {
+  background: #fff; border-radius: 16px; padding: 2rem;
+  border-left: 3px solid var(--teal);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  transition: all 0.3s;
+}
+.loc-card:hover { transform: translateX(6px); box-shadow: 0 8px 40px rgba(0,0,0,0.1); }
+.loc-card-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+.loc-card-header h3 {
+  font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 400;
+}
+.loc-badge {
+  font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+  background: rgba(15,169,144,0.1); color: var(--teal);
+  padding: 0.2rem 0.7rem; border-radius: 50px; border: 1px solid rgba(15,169,144,0.25);
+}
+.loc-detail { display: flex; gap: 0.9rem; margin-bottom: 0.9rem; align-items: flex-start; }
+.loc-icon-box {
+  width: 30px; height: 30px; background: rgba(15,169,144,0.08);
+  border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; flex-shrink: 0;
+}
+.loc-detail strong { display: block; font-size: 0.82rem; color: var(--ink); font-weight: 500; }
+.loc-detail span { font-size: 0.78rem; color: #6b7280; line-height: 1.5; }
+.loc-map-area {
+  border-radius: 20px; overflow: hidden; position: relative;
+  min-height: 480px; background: linear-gradient(145deg, #0e1f3a, #162d50);
+  display: flex; align-items: center; justify-content: center;
+}
+.map-layer-grid {
+  position: absolute; inset: 0; opacity: 0.05;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.9) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.9) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+.map-layer-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(15,169,144,0.25) 0%, transparent 60%);
+}
+.map-content { position: relative; z-index: 2; text-align: center; }
+.map-pin-animated {
+  width: 18px; height: 18px; border-radius: 50%; background: var(--gold);
+  margin: 0 auto 1rem;
+  box-shadow: 0 0 0 8px rgba(212,168,83,0.2), 0 0 0 16px rgba(212,168,83,0.08);
+  animation: mapPing 2.5s ease-in-out infinite;
+}
+@keyframes mapPing {
+  0%,100% { box-shadow: 0 0 0 8px rgba(212,168,83,0.25), 0 0 0 20px rgba(212,168,83,0.08); }
+  50% { box-shadow: 0 0 0 16px rgba(212,168,83,0.15), 0 0 0 36px rgba(212,168,83,0.04); }
+}
+.map-content h4 {
+  font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff;
+  margin-bottom: 0.4rem;
+}
+.map-content p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+.map-open-btn {
+  display: inline-block; margin-top: 1.5rem;
+  font-family: 'Tenor Sans'; font-size: 0.68rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink);
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  padding: 0.75rem 1.8rem; border-radius: 2px; text-decoration: none;
+  transition: all 0.25s;
+}
+.map-open-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,168,83,0.4); }
+
+/* ── TESTIMONIALS ── */
+.testi-section {
+  position: relative; z-index: 2;
+  background: var(--deep); padding: 9rem 7%;
+}
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem; }
+.testi-card {
+  background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+  border-radius: 18px; padding: 2.2rem;
+  position: relative; transition: all 0.35s;
+}
+.testi-card:hover {
+  border-color: rgba(212,168,83,0.3); background: rgba(212,168,83,0.03);
+  transform: translateY(-5px);
+}
+.testi-quote {
+  font-family: 'Playfair Display', serif; font-size: 4rem; line-height: 0.6;
+  color: var(--gold); opacity: 0.25; margin-bottom: 1rem;
+}
+.testi-stars { color: var(--gold); font-size: 0.75rem; letter-spacing: 0.1em; margin-bottom: 1rem; }
+.testi-text {
+  font-size: 0.88rem; line-height: 1.8; color: rgba(255,255,255,0.6);
+  font-weight: 200; margin-bottom: 1.8rem;
+}
+.testi-author { display: flex; align-items: center; gap: 0.9rem; }
+.tauth-ava {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--midnight));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-size: 1rem; color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.tauth-name { font-weight: 400; font-size: 0.87rem; }
+.tauth-loc { font-size: 0.73rem; color: rgba(255,255,255,0.35); }
+
+/* ── CTA ── */
+.cta-section {
+  position: relative; z-index: 2; overflow: hidden;
+  background: var(--midnight);
+  padding: 9rem 7%; text-align: center;
+}
+.cta-orb-1 {
+  position: absolute; width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(15,169,144,0.15), transparent 70%);
+  top: -150px; left: -100px; filter: blur(60px); pointer-events: none;
+}
+.cta-orb-2 {
+  position: absolute; width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,168,83,0.1), transparent 70%);
+  bottom: -100px; right: -50px; filter: blur(60px); pointer-events: none;
+}
+.cta-content { position: relative; z-index: 2; }
+.cta-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; line-height: 1.1;
+  margin-bottom: 1.2rem;
+}
+.cta-section h2 em { font-style: italic; color: var(--teal2); }
+.cta-section p {
+  font-size: 1rem; color: rgba(255,255,255,0.55); max-width: 480px;
+  margin: 0 auto 2.8rem; line-height: 1.8; font-weight: 200;
+}
+.cta-buttons { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+.cta-phone {
+  display: flex; align-items: center; gap: 0.7rem;
+  font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 2rem;
+}
+.cta-phone strong { color: #fff; }
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 2;
+  background: #040c18;
+  padding: 5rem 7% 2.5rem;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem;
+  margin-bottom: 4rem; padding-bottom: 3.5rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+.footer-brand-logo {
+  font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 400;
+  color: #fff; margin-bottom: 1rem; display: block; text-decoration: none;
+}
+.footer-brand-logo span { color: var(--gold); }
+.footer-brand p { font-size: 0.82rem; line-height: 1.8; color: rgba(255,255,255,0.35); max-width: 270px; font-weight: 200; }
+.footer-acc { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.5rem; }
+.footer-acc-tag {
+  font-size: 0.62rem; letter-spacing: 0.07em; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.3);
+  padding: 0.25rem 0.65rem; border-radius: 3px;
+}
+.footer-col h4 {
+  font-family: 'Tenor Sans'; font-size: 0.68rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 0.65rem; }
+.footer-col a {
+  font-size: 0.82rem; color: rgba(255,255,255,0.35); text-decoration: none;
+  font-weight: 200; transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--teal2); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-bottom p { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
+.footer-legal { display: flex; gap: 1.5rem; }
+.footer-legal a { font-size: 0.73rem; color: rgba(255,255,255,0.2); text-decoration: none; transition: color 0.2s; }
+.footer-legal a:hover { color: rgba(255,255,255,0.5); }
+.footer-crisis {
+  margin: 3rem 0; padding: 1.5rem 2rem;
+  background: rgba(212,168,83,0.06); border: 1px solid rgba(212,168,83,0.2);
+  border-radius: 12px; display: flex; align-items: center; justify-content: space-between;
+}
+.footer-crisis p { font-size: 0.8rem; color: rgba(255,255,255,0.45); }
+.footer-crisis strong { color: var(--gold); font-size: 1.05rem; }
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px) {
+  .about-section, .locations-grid { grid-template-columns: 1fr; }
+  .services-grid, .doctors-scroll, .testi-grid { grid-template-columns: 1fr 1fr; }
+  .about-right { min-height: 400px; }
+  .section-header { flex-direction: column; gap: 1rem; }
+  .section-header p { text-align: left; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+}
+@media(max-width:640px) {
+  .services-grid, .doctors-scroll, .testi-grid { grid-template-columns: 1fr; }
+  .nav-center, .nav-phone { display: none; }
+  .about-values { grid-template-columns: 1fr; }
+  .about-badges { grid-template-columns: 1fr 1fr; }
+  .hstat { padding-right: 1rem; margin-right: 1rem; }
+  .hstat-num { font-size: 2rem; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="logo">Clarity<span>Health</span></div>
-  <ul class="nav-links">
+<!-- CURSOR -->
+<div id="cursor">
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+</div>
+
+<!-- BG CANVAS (particles) -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Clarity<span class="logo-accent"></span>Health</a>
+  <ul class="nav-center">
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#doctors">Physicians</a></li>
-    <li><a href="#location">Location</a></li>
+    <li><a href="#location">Locations</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Book Appointment</a>
+  <div class="nav-right">
+    <span class="nav-phone">(909) 555-0182</span>
+    <a href="#contact" class="nav-btn">Book Now</a>
+  </div>
 </nav>
 
-<!-- HERO -->
+<!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero">
-  <div class="hero-bg-text">CLARITY</div>
-  <div class="hero-left">
-    <div class="hero-badge">Board-Certified Addiction Medicine</div>
-    <h1>Recovery Begins<br>with <em>Compassionate</em><br>Expert Care</h1>
-    <p>At Clarity Health, our addiction medicine specialists provide evidence-based treatment tailored to each patient's unique journey toward lasting recovery.</p>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <svg class="hero-line-art" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="200" cy="200" r="190" stroke="white" stroke-width="1"/>
+    <circle cx="200" cy="200" r="140" stroke="white" stroke-width="0.5"/>
+    <circle cx="200" cy="200" r="90" stroke="white" stroke-width="1"/>
+    <line x1="10" y1="200" x2="390" y2="200" stroke="white" stroke-width="0.5"/>
+    <line x1="200" y1="10" x2="200" y2="390" stroke="white" stroke-width="0.5"/>
+    <line x1="55" y1="55" x2="345" y2="345" stroke="white" stroke-width="0.3"/>
+    <line x1="345" y1="55" x2="55" y2="345" stroke="white" stroke-width="0.3"/>
+    <circle cx="200" cy="200" r="8" fill="white" opacity="0.5"/>
+    <circle cx="200" cy="60" r="4" fill="white" opacity="0.3"/>
+    <circle cx="200" cy="340" r="4" fill="white" opacity="0.3"/>
+    <circle cx="60" cy="200" r="4" fill="white" opacity="0.3"/>
+    <circle cx="340" cy="200" r="4" fill="white" opacity="0.3"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-kicker">
+      <div class="kicker-line"></div>
+      <div class="kicker-text">Board-Certified Addiction Medicine · Inland Empire</div>
+    </div>
+    <h1>
+      <span class="line"><span>Where</span></span>
+      <span class="line"><span>Healing <em>Begins</em></span></span>
+      <span class="line"><span>With Dignity</span></span>
+    </h1>
+    <p class="hero-sub">Clarity Health delivers compassionate, evidence-based addiction medicine to guide patients through recovery with clinical excellence and unwavering respect.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Schedule a Consultation</a>
-      <a href="#services" class="btn-outline">Our Services</a>
+      <a href="#contact" class="btn-gold"><span>Schedule a Consultation</span></a>
+      <a href="#services" class="btn-ghost">
+        Explore Services
+        <div class="btn-ghost-arrow">→</div>
+      </a>
     </div>
     <div class="hero-stats">
-      <div>
-        <div class="stat-num">2,400+</div>
-        <div class="stat-label">Patients Treated</div>
+      <div class="hstat">
+        <div class="hstat-num">2,400+</div>
+        <div class="hstat-label">Patients Treated</div>
       </div>
-      <div>
-        <div class="stat-num">94%</div>
-        <div class="stat-label">Recovery Success Rate</div>
+      <div class="hstat">
+        <div class="hstat-num">94%</div>
+        <div class="hstat-label">Recovery Rate</div>
       </div>
-      <div>
-        <div class="stat-num">15+</div>
-        <div class="stat-label">Years of Experience</div>
+      <div class="hstat">
+        <div class="hstat-num">6</div>
+        <div class="hstat-label">Expert Clinicians</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">15+</div>
+        <div class="hstat-label">Years of Practice</div>
       </div>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-card">
-      <h3>Reach Us Today</h3>
-      <div class="info-item">
-        <div class="info-icon">📍</div>
-        <div class="info-text">
-          <strong>Main Location</strong>
-          <span>350 E Citrus Ave, Suite 200<br>Redlands, CA 92373</span>
-        </div>
-      </div>
-      <div class="info-item">
-        <div class="info-icon">🕐</div>
-        <div class="info-text">
-          <strong>Office Hours</strong>
-          <span>Mon – Fri: 8:00 AM – 6:00 PM<br>Sat: 9:00 AM – 1:00 PM</span>
-        </div>
-      </div>
-      <div class="info-item">
-        <div class="info-icon">📞</div>
-        <div class="info-text">
-          <strong>Phone</strong>
-          <span>(909) 555-0182</span>
-        </div>
-      </div>
-      <div class="info-item">
-        <div class="info-icon">✉️</div>
-        <div class="info-text">
-          <strong>Email</strong>
-          <span>care@clarityhealth.com</span>
-        </div>
-      </div>
-      <div class="emergency-bar">
-        <p>24/7 Crisis Helpline</p>
-        <strong>1-800-662-HELP (4357)</strong>
-      </div>
-    </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <div class="scroll-text">Scroll</div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-text">
-    <span class="section-label">Who We Are</span>
-    <h2 class="section-title">A New Standard in<br><em>Addiction Medicine</em></h2>
-    <p>Clarity Health was founded on the belief that addiction is a complex, chronic medical condition — not a moral failing. Our multidisciplinary team combines cutting-edge medical care with behavioral health expertise and compassionate support.</p>
-    <p>We serve patients across the Inland Empire with individualized treatment plans, integrating medication-assisted treatment (MAT), psychotherapy, and long-term wellness strategies to build sustainable recovery.</p>
-    <div class="about-pillars">
-      <div class="pillar">
+<!-- ═══════════════ MARQUEE ═══════════════ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <!-- Repeated twice for seamless loop -->
+    <span class="marquee-item"><span class="marquee-dot"></span>Opioid Use Disorder</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Alcohol Dependence</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Medication-Assisted Treatment</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Dual Diagnosis</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Medical Detoxification</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Intensive Outpatient</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Telehealth Services</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Relapse Prevention</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Stimulant Use Disorder</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Trauma-Informed Care</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Opioid Use Disorder</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Alcohol Dependence</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Medication-Assisted Treatment</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Dual Diagnosis</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Medical Detoxification</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Intensive Outpatient</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Telehealth Services</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Relapse Prevention</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Stimulant Use Disorder</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Trauma-Informed Care</span>
+  </div>
+</div>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section class="about-section" id="about">
+  <div class="about-left">
+    <div class="about-label">
+      <div class="about-label-line"></div>
+      <div class="about-label-text">Who We Are</div>
+    </div>
+    <h2 class="reveal">A New Standard<br>in <em>Addiction Medicine</em></h2>
+    <p class="reveal reveal-delay-1">Clarity Health was founded on the conviction that addiction is a complex medical condition — not a moral failing. Our multidisciplinary team unites clinical precision with deep empathy.</p>
+    <p class="reveal reveal-delay-2">Serving patients across the Inland Empire, we deliver individualized treatment integrating medication-assisted therapy, psychotherapy, and comprehensive wellness strategies for sustainable recovery.</p>
+    <div class="about-values reveal reveal-delay-3">
+      <div class="aval">
+        <div class="aval-icon">🏥</div>
         <h4>Evidence-Based</h4>
-        <p>All protocols follow SAMHSA and ASAM clinical guidelines.</p>
+        <p>All protocols follow SAMHSA & ASAM clinical guidelines.</p>
       </div>
-      <div class="pillar">
-        <h4>Whole-Person Care</h4>
-        <p>Mental, physical, and social wellbeing addressed together.</p>
+      <div class="aval">
+        <div class="aval-icon">🤍</div>
+        <h4>Whole-Person</h4>
+        <p>Mind, body, and spirit addressed as one integrated system.</p>
       </div>
-      <div class="pillar">
+      <div class="aval">
+        <div class="aval-icon">🔒</div>
         <h4>Confidential</h4>
-        <p>HIPAA-compliant, stigma-free environment at every visit.</p>
+        <p>HIPAA-compliant, stigma-free environment, every visit.</p>
       </div>
-      <div class="pillar">
+      <div class="aval">
+        <div class="aval-icon">🌐</div>
         <h4>Accessible</h4>
-        <p>Most major insurance plans accepted; telehealth available.</p>
+        <p>Most major insurance plans accepted; telehealth statewide.</p>
       </div>
     </div>
   </div>
-  <div class="about-visual">
-    <div class="about-img-block">
-      <div class="about-img-inner">
-        <div class="cross-icon">⚕️</div>
-        <h3>Healing. Hope. Health.</h3>
-        <p>Serving Redlands & the Inland Empire since 2009</p>
+  <div class="about-right">
+    <div class="about-right-bg"></div>
+    <div class="about-right-grid"></div>
+    <div class="about-big-num">15</div>
+    <div class="about-badges reveal">
+      <div class="abadge">
+        <div class="abadge-num">2,400+</div>
+        <div class="abadge-label">Patients Treated</div>
+      </div>
+      <div class="abadge">
+        <div class="abadge-num">94%</div>
+        <div class="abadge-label">Recovery Success</div>
+      </div>
+      <div class="abadge">
+        <div class="abadge-num">6</div>
+        <div class="abadge-label">Expert Clinicians</div>
+      </div>
+      <div class="abadge">
+        <div class="abadge-num">2</div>
+        <div class="abadge-label">Clinic Locations</div>
       </div>
     </div>
-    <div class="about-badge-float">
-      <strong>ABAM</strong>
-      <span>Board Certified</span>
+    <div class="about-cert reveal reveal-delay-2">
+      <span class="cert-tag">CARF Accredited</span>
+      <span class="cert-tag">ASAM Member</span>
+      <span class="cert-tag">SAMHSA Certified</span>
+      <span class="cert-tag">ABAM Board Certified</span>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="services-header">
-    <span class="section-label">What We Offer</span>
-    <h2 class="section-title">Comprehensive <em>Treatment Services</em></h2>
-    <p>From initial evaluation to long-term recovery support, our services span the full continuum of addiction care.</p>
+<!-- ═══════════════ SERVICES ═══════════════ -->
+<section class="services-section" id="services">
+  <div class="section-header">
+    <div class="section-label-wrap">
+      <div class="sec-kicker">
+        <div class="sec-kicker-dot"></div>
+        <div class="sec-kicker-text">What We Offer</div>
+      </div>
+      <h2 class="sec-title reveal">Comprehensive<br><em>Treatment Services</em></h2>
+    </div>
+    <p class="reveal reveal-delay-2">From first evaluation to long-term recovery maintenance — we cover the full continuum of addiction care.</p>
   </div>
-  <div class="services-grid">
-    <div class="service-card">
-      <div class="service-icon">💊</div>
+  <div class="services-grid reveal">
+    <div class="svc-card">
+      <div class="svc-num">01</div>
+      <div class="svc-icon-wrap">💊</div>
       <h3>Medication-Assisted Treatment</h3>
-      <p>Buprenorphine/naloxone (Suboxone), naltrexone (Vivitrol), and methadone programs for opioid and alcohol use disorders under close physician supervision.</p>
-      <span class="service-tag">MAT Program</span>
+      <p>Buprenorphine/naloxone, naltrexone, and methadone programs for opioid and alcohol use disorders under close physician supervision and ongoing monitoring.</p>
+      <a href="#" class="svc-link">Learn More →</a>
     </div>
-    <div class="service-card">
-      <div class="service-icon">🧠</div>
+    <div class="svc-card">
+      <div class="svc-num">02</div>
+      <div class="svc-icon-wrap">🧠</div>
       <h3>Dual Diagnosis Treatment</h3>
-      <p>Co-occurring mental health conditions including depression, anxiety, PTSD, and bipolar disorder treated alongside addiction by integrated care teams.</p>
-      <span class="service-tag">Integrated Care</span>
+      <p>Co-occurring depression, anxiety, PTSD, and bipolar disorders treated alongside addiction by our integrated behavioral health and medical teams.</p>
+      <a href="#" class="svc-link">Learn More →</a>
     </div>
-    <div class="service-card">
-      <div class="service-icon">🤝</div>
-      <h3>Outpatient Programs (IOP/OP)</h3>
-      <p>Intensive and standard outpatient programs offering structured group therapy, individual counseling, and medical check-ins without inpatient admission.</p>
-      <span class="service-tag">Flexible Scheduling</span>
+    <div class="svc-card">
+      <div class="svc-num">03</div>
+      <div class="svc-icon-wrap">🤝</div>
+      <h3>Intensive Outpatient (IOP)</h3>
+      <p>Structured group therapy, individual counseling, and medical check-ins — comprehensive treatment without requiring inpatient admission.</p>
+      <a href="#" class="svc-link">Learn More →</a>
     </div>
-    <div class="service-card">
-      <div class="service-icon">🔬</div>
+    <div class="svc-card">
+      <div class="svc-num">04</div>
+      <div class="svc-icon-wrap">🔬</div>
       <h3>Medical Detoxification</h3>
-      <p>Physician-supervised withdrawal management for alcohol, opioids, benzodiazepines, and stimulants — safely reducing discomfort and medical risk.</p>
-      <span class="service-tag">Safe Detox</span>
+      <p>Physician-supervised withdrawal management for alcohol, opioids, benzodiazepines, and stimulants — minimizing discomfort and medical risk safely.</p>
+      <a href="#" class="svc-link">Learn More →</a>
     </div>
-    <div class="service-card">
-      <div class="service-icon">💻</div>
+    <div class="svc-card">
+      <div class="svc-num">05</div>
+      <div class="svc-icon-wrap">💻</div>
       <h3>Telehealth Services</h3>
-      <p>Secure video appointments for medication management, therapy, and follow-up consultations — accessible from home throughout California.</p>
-      <span class="service-tag">CA Statewide</span>
+      <p>Secure video appointments for medication management, therapy, and follow-up consultations — accessible from anywhere across California.</p>
+      <a href="#" class="svc-link">Learn More →</a>
     </div>
-    <div class="service-card">
-      <div class="service-icon">🌱</div>
+    <div class="svc-card">
+      <div class="svc-num">06</div>
+      <div class="svc-icon-wrap">🌱</div>
       <h3>Aftercare & Relapse Prevention</h3>
-      <p>Alumni support groups, ongoing medication management, wellness coaching, and community referrals to maintain long-term sobriety.</p>
-      <span class="service-tag">Long-Term Support</span>
+      <p>Alumni groups, ongoing medication management, wellness coaching, and community referrals to build and sustain long-term sobriety.</p>
+      <a href="#" class="svc-link">Learn More →</a>
     </div>
   </div>
 </section>
 
-<!-- DOCTORS -->
-<section class="doctors" id="doctors">
+<!-- ═══════════════ DOCTORS ═══════════════ -->
+<section class="doctors-section" id="doctors">
   <div class="doctors-header">
-    <span class="section-label">Our Physicians</span>
-    <h2 class="section-title" style="color:var(--white)">Meet Your <em style="color:var(--teal-light)">Care Team</em></h2>
+    <div class="sec-kicker">
+      <div class="sec-kicker-dot" style="background:var(--gold)"></div>
+      <div class="sec-kicker-text" style="color:var(--gold)">Our Care Team</div>
+    </div>
+    <h2 class="sec-title reveal">Meet Your <em>Physicians</em></h2>
   </div>
-  <div class="doctors-grid">
+  <div class="doctors-scroll">
 
-    <div class="doctor-card">
-      <div class="doctor-photo">
-        <div class="doctor-avatar">👨‍⚕️</div>
+    <div class="doc-card reveal">
+      <div class="doc-photo-area">
+        <div class="doc-photo-glow"></div>
+        <div class="doc-initials">MR</div>
+        <div class="doc-specialty-badge">Medical Director</div>
       </div>
-      <div class="doctor-info">
-        <div class="doctor-name">Dr. Marcus J. Reyes, MD</div>
-        <div class="doctor-title">Medical Director · Board-Certified Addiction Medicine</div>
-        <div class="doctor-bio">Dr. Reyes has over 18 years of experience in addiction medicine and internal medicine. A graduate of UCLA School of Medicine, he completed his addiction medicine fellowship at UC San Francisco and is an active member of ASAM and CSAM.</div>
-        <div class="doctor-tags">
-          <span class="dtag">Opioid Use Disorder</span>
-          <span class="dtag">Alcohol Dependence</span>
-          <span class="dtag">MAT</span>
+      <div class="doc-body">
+        <div class="doc-name">Dr. Marcus J. Reyes, MD</div>
+        <div class="doc-title">Board-Certified Addiction Medicine · Internal Medicine</div>
+        <div class="doc-bio">18 years of experience in addiction and internal medicine. UCLA School of Medicine graduate; addiction medicine fellowship at UCSF. Active ASAM & CSAM member.</div>
+        <div class="doc-expertise">
+          <span class="exp-tag">Opioid Use Disorder</span>
+          <span class="exp-tag">Alcohol Dependence</span>
+          <span class="exp-tag">MAT</span>
         </div>
       </div>
     </div>
 
-    <div class="doctor-card">
-      <div class="doctor-photo">
-        <div class="doctor-avatar">👩‍⚕️</div>
+    <div class="doc-card reveal reveal-delay-1">
+      <div class="doc-photo-area">
+        <div class="doc-photo-glow"></div>
+        <div class="doc-initials">PA</div>
+        <div class="doc-specialty-badge">Psychiatry & Addiction</div>
       </div>
-      <div class="doctor-info">
-        <div class="doctor-name">Dr. Priya Anand, MD, MPH</div>
-        <div class="doctor-title">Attending Physician · Psychiatry & Addiction Medicine</div>
-        <div class="doctor-bio">Dr. Anand is dual board-certified in psychiatry and addiction medicine. Trained at Stanford and Johns Hopkins, she specializes in co-occurring disorders and brings a trauma-informed lens to every patient relationship.</div>
-        <div class="doctor-tags">
-          <span class="dtag">Dual Diagnosis</span>
-          <span class="dtag">Trauma-Informed</span>
-          <span class="dtag">Mood Disorders</span>
+      <div class="doc-body">
+        <div class="doc-name">Dr. Priya Anand, MD, MPH</div>
+        <div class="doc-title">Dual Board-Certified · Psychiatry & Addiction Medicine</div>
+        <div class="doc-bio">Trained at Stanford and Johns Hopkins. Specializes in co-occurring disorders with a trauma-informed approach to every patient relationship.</div>
+        <div class="doc-expertise">
+          <span class="exp-tag">Dual Diagnosis</span>
+          <span class="exp-tag">Trauma-Informed</span>
+          <span class="exp-tag">Mood Disorders</span>
         </div>
       </div>
     </div>
 
-    <div class="doctor-card">
-      <div class="doctor-photo">
-        <div class="doctor-avatar">👨‍⚕️</div>
+    <div class="doc-card reveal reveal-delay-2">
+      <div class="doc-photo-area">
+        <div class="doc-photo-glow"></div>
+        <div class="doc-initials">TC</div>
+        <div class="doc-specialty-badge">Family & Addiction</div>
       </div>
-      <div class="doctor-info">
-        <div class="doctor-name">Dr. Thomas W. Chen, DO</div>
-        <div class="doctor-title">Associate Physician · Family & Addiction Medicine</div>
-        <div class="doctor-bio">Dr. Chen brings a whole-person, osteopathic approach to addiction medicine. A graduate of Western University of Health Sciences, he focuses on long-term recovery maintenance and patient education in the Inland Empire community.</div>
-        <div class="doctor-tags">
-          <span class="dtag">Stimulant Disorders</span>
-          <span class="dtag">Wellness</span>
-          <span class="dtag">Telehealth</span>
+      <div class="doc-body">
+        <div class="doc-name">Dr. Thomas W. Chen, DO</div>
+        <div class="doc-title">Associate Physician · Family & Addiction Medicine</div>
+        <div class="doc-bio">Brings an osteopathic whole-person approach. Graduate of Western University of Health Sciences. Focuses on long-term recovery and community-based care.</div>
+        <div class="doc-expertise">
+          <span class="exp-tag">Stimulant Disorders</span>
+          <span class="exp-tag">Wellness</span>
+          <span class="exp-tag">Telehealth</span>
         </div>
       </div>
     </div>
 
-    <div class="doctor-card">
-      <div class="doctor-photo">
-        <div class="doctor-avatar">👩‍⚕️</div>
+    <div class="doc-card reveal reveal-delay-1">
+      <div class="doc-photo-area">
+        <div class="doc-photo-glow"></div>
+        <div class="doc-initials">RF</div>
+        <div class="doc-specialty-badge">Addiction Fellow</div>
       </div>
-      <div class="doctor-info">
-        <div class="doctor-name">Dr. Renée L. Fontaine, MD</div>
-        <div class="doctor-title">Addiction Medicine Fellow · Loma Linda University</div>
-        <div class="doctor-bio">Dr. Fontaine completed her residency in internal medicine at Loma Linda University Medical Center and is currently completing her addiction medicine fellowship. She has a special interest in adolescent substance use and prevention.</div>
-        <div class="doctor-tags">
-          <span class="dtag">Adolescents</span>
-          <span class="dtag">Prevention</span>
-          <span class="dtag">Buprenorphine</span>
+      <div class="doc-body">
+        <div class="doc-name">Dr. Renée L. Fontaine, MD</div>
+        <div class="doc-title">Addiction Medicine Fellow · Loma Linda University</div>
+        <div class="doc-bio">Internal medicine residency at Loma Linda University Medical Center. Special interest in adolescent substance use and community prevention initiatives.</div>
+        <div class="doc-expertise">
+          <span class="exp-tag">Adolescents</span>
+          <span class="exp-tag">Prevention</span>
+          <span class="exp-tag">Buprenorphine</span>
         </div>
       </div>
     </div>
 
-    <div class="doctor-card">
-      <div class="doctor-photo">
-        <div class="doctor-avatar">👨‍⚕️</div>
+    <div class="doc-card reveal reveal-delay-2">
+      <div class="doc-photo-area">
+        <div class="doc-photo-glow"></div>
+        <div class="doc-initials">SA</div>
+        <div class="doc-specialty-badge">Behavioral Health</div>
       </div>
-      <div class="doctor-info">
-        <div class="doctor-name">Dr. Samuel O. Adeyemi, PhD, LMFT</div>
-        <div class="doctor-title">Director of Behavioral Health</div>
-        <div class="doctor-bio">Dr. Adeyemi leads our behavioral health division with a doctorate in clinical psychology and licensure as a marriage and family therapist. He oversees group therapy, CBT, and motivational interviewing programs across all levels of care.</div>
-        <div class="doctor-tags">
-          <span class="dtag">CBT</span>
-          <span class="dtag">Motivational Interviewing</span>
-          <span class="dtag">Group Therapy</span>
+      <div class="doc-body">
+        <div class="doc-name">Dr. Samuel O. Adeyemi, PhD</div>
+        <div class="doc-title">Director of Behavioral Health · LMFT</div>
+        <div class="doc-bio">Doctorate in clinical psychology. Oversees group therapy, CBT, and motivational interviewing programs. Expert in family systems and long-term recovery coaching.</div>
+        <div class="doc-expertise">
+          <span class="exp-tag">CBT</span>
+          <span class="exp-tag">Motivational Interviewing</span>
+          <span class="exp-tag">Group Therapy</span>
         </div>
       </div>
     </div>
 
-    <div class="doctor-card">
-      <div class="doctor-photo">
-        <div class="doctor-avatar">👩‍⚕️</div>
+    <div class="doc-card reveal reveal-delay-3">
+      <div class="doc-photo-area">
+        <div class="doc-photo-glow"></div>
+        <div class="doc-initials">MT</div>
+        <div class="doc-specialty-badge">Psychiatric NP</div>
       </div>
-      <div class="doctor-info">
-        <div class="doctor-name">Maria G. Torres, PMHNP-BC</div>
-        <div class="doctor-title">Psychiatric Nurse Practitioner</div>
-        <div class="doctor-bio">Maria is a board-certified psychiatric mental health nurse practitioner with a decade of experience in addiction and mental health settings. She manages medication protocols and patient education for our telehealth and outpatient programs.</div>
-        <div class="doctor-tags">
-          <span class="dtag">Medication Mgmt</span>
-          <span class="dtag">Telehealth</span>
-          <span class="dtag">Patient Education</span>
+      <div class="doc-body">
+        <div class="doc-name">Maria G. Torres, PMHNP-BC</div>
+        <div class="doc-title">Psychiatric Nurse Practitioner · Board-Certified</div>
+        <div class="doc-bio">A decade of experience in addiction and mental health settings. Manages medication protocols and patient education across telehealth and outpatient programs.</div>
+        <div class="doc-expertise">
+          <span class="exp-tag">Medication Mgmt</span>
+          <span class="exp-tag">Telehealth</span>
+          <span class="exp-tag">Patient Education</span>
         </div>
       </div>
     </div>
@@ -741,146 +1150,180 @@
   </div>
 </section>
 
-<!-- LOCATION -->
-<section class="location" id="location">
-  <span class="section-label">Find Us</span>
-  <h2 class="section-title">Our <em>Locations</em></h2>
-  <div class="location-grid">
-    <div>
-      <div class="location-card" style="margin-bottom:1.5rem">
-        <h3>Redlands Main Clinic</h3>
+<!-- ═══════════════ LOCATION ═══════════════ -->
+<section class="locations-section" id="location">
+  <div class="sec-kicker">
+    <div class="sec-kicker-dot"></div>
+    <div class="sec-kicker-text">Find Us</div>
+  </div>
+  <h2 class="sec-title reveal">Our <em>Locations</em></h2>
+  <div class="locations-grid">
+    <div class="loc-cards">
+      <div class="loc-card reveal">
+        <div class="loc-card-header">
+          <h3>Redlands Main Clinic</h3>
+          <div class="loc-badge">Primary Location</div>
+        </div>
         <div class="loc-detail">
-          <div class="loc-icon">📍</div>
-          <div class="loc-text">
+          <div class="loc-icon-box">📍</div>
+          <div>
             <strong>Address</strong>
             <span>350 E Citrus Ave, Suite 200<br>Redlands, CA 92373</span>
           </div>
         </div>
         <div class="loc-detail">
-          <div class="loc-icon">🕐</div>
-          <div class="loc-text">
+          <div class="loc-icon-box">🕐</div>
+          <div>
             <strong>Hours</strong>
-            <span>Mon – Fri: 8:00 AM – 6:00 PM<br>Saturday: 9:00 AM – 1:00 PM<br>Sunday: Closed</span>
+            <span>Mon – Fri: 8:00 AM – 6:00 PM<br>Saturday: 9:00 AM – 1:00 PM</span>
           </div>
         </div>
         <div class="loc-detail">
-          <div class="loc-icon">📞</div>
-          <div class="loc-text">
+          <div class="loc-icon-box">📞</div>
+          <div>
             <strong>Phone</strong>
             <span>(909) 555-0182</span>
           </div>
         </div>
         <div class="loc-detail">
-          <div class="loc-icon">🚌</div>
-          <div class="loc-text">
+          <div class="loc-icon-box">🚌</div>
+          <div>
             <strong>Transit & Parking</strong>
-            <span>Free parking on-site · Near Omnitrans Route 8 stop</span>
+            <span>Free on-site parking · Omnitrans Route 8 nearby</span>
           </div>
         </div>
       </div>
-      <div class="location-card">
-        <h3>San Bernardino Satellite Office</h3>
+      <div class="loc-card reveal reveal-delay-2">
+        <div class="loc-card-header">
+          <h3>San Bernardino Office</h3>
+          <div class="loc-badge" style="background:rgba(212,168,83,0.1);color:var(--gold);border-color:rgba(212,168,83,0.25)">Satellite</div>
+        </div>
         <div class="loc-detail">
-          <div class="loc-icon">📍</div>
-          <div class="loc-text">
+          <div class="loc-icon-box">📍</div>
+          <div>
             <strong>Address</strong>
             <span>1735 Medical Center Dr, Suite 110<br>San Bernardino, CA 92411</span>
           </div>
         </div>
         <div class="loc-detail">
-          <div class="loc-icon">🕐</div>
-          <div class="loc-text">
+          <div class="loc-icon-box">🕐</div>
+          <div>
             <strong>Hours</strong>
-            <span>Tues & Thurs: 10:00 AM – 5:00 PM<br>By appointment only</span>
+            <span>Tuesday & Thursday: 10:00 AM – 5:00 PM<br>By appointment only</span>
           </div>
         </div>
         <div class="loc-detail">
-          <div class="loc-icon">📞</div>
-          <div class="loc-text">
+          <div class="loc-icon-box">📞</div>
+          <div>
             <strong>Phone</strong>
             <span>(909) 555-0247</span>
           </div>
         </div>
       </div>
     </div>
-    <div class="map-placeholder">
-      <div class="map-grid-overlay"></div>
-      <div class="map-pin"></div>
-      <div class="map-inner">
-        <div class="map-icon">🗺️</div>
-        <h4>Redlands, CA</h4>
-        <p>350 E Citrus Ave, Suite 200<br>Redlands, CA 92373</p>
-        <br>
-        <a href="https://maps.google.com/?q=350+E+Citrus+Ave+Redlands+CA" target="_blank" style="background:var(--teal);color:white;padding:0.7rem 1.5rem;border-radius:6px;text-decoration:none;font-size:0.85rem;display:inline-block;margin-top:1rem;">Open in Google Maps</a>
+    <div class="loc-map-area reveal reveal-delay-2">
+      <div class="map-layer-grid"></div>
+      <div class="map-layer-glow"></div>
+      <div class="map-content">
+        <div class="map-pin-animated"></div>
+        <h4>Redlands, California</h4>
+        <p>350 E Citrus Ave, Suite 200<br>Redlands, CA 92373<br><br>Serving the Inland Empire</p>
+        <a href="https://maps.google.com/?q=350+E+Citrus+Ave+Redlands+CA" target="_blank" class="map-open-btn">Open in Google Maps</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testimonials" id="contact">
-  <div class="testimonials-header">
-    <span class="section-label">Patient Stories</span>
-    <h2 class="section-title">Lives <em>Changed</em></h2>
+<!-- ═══════════════ TESTIMONIALS ═══════════════ -->
+<section class="testi-section" id="contact">
+  <div class="sec-kicker">
+    <div class="sec-kicker-dot"></div>
+    <div class="sec-kicker-text">Patient Stories</div>
   </div>
-  <div class="testimonials-grid">
-    <div class="testimonial-card">
-      <div class="quote-mark">"</div>
-      <div class="stars">★★★★★</div>
-      <p class="testimonial-text">Dr. Reyes and his team gave me my life back. After years of struggling with opioid dependence, I finally found a practice that treated me with dignity. I am now three years sober and couldn't be more grateful.</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">J</div>
+  <h2 class="sec-title reveal">Lives <em>Transformed</em></h2>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Dr. Reyes and his team gave me my life back. After years of struggling, I finally found a practice that treated me with dignity. I am now three years sober and couldn't be more grateful to Clarity Health.</p>
+      <div class="testi-author">
+        <div class="tauth-ava">J</div>
         <div>
-          <div class="author-name">James T.</div>
-          <div class="author-role">Patient since 2021 · Redlands, CA</div>
+          <div class="tauth-name">James T.</div>
+          <div class="tauth-loc">Patient since 2021 · Redlands, CA</div>
         </div>
       </div>
     </div>
-    <div class="testimonial-card">
-      <div class="quote-mark">"</div>
-      <div class="stars">★★★★★</div>
-      <p class="testimonial-text">Dr. Anand truly understands how mental health and addiction are intertwined. She took my anxiety seriously from day one and worked with me on both issues simultaneously. The care I've received here is unlike anything else.</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">S</div>
+    <div class="testi-card reveal reveal-delay-2">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Dr. Anand truly understands how mental health and addiction are intertwined. She took my anxiety seriously from day one and treated both simultaneously. The care I've received is unlike anything I'd experienced before.</p>
+      <div class="testi-author">
+        <div class="tauth-ava">S</div>
         <div>
-          <div class="author-name">Sandra M.</div>
-          <div class="author-role">Patient since 2022 · San Bernardino, CA</div>
+          <div class="tauth-name">Sandra M.</div>
+          <div class="tauth-loc">Patient since 2022 · San Bernardino, CA</div>
         </div>
       </div>
     </div>
-    <div class="testimonial-card">
-      <div class="quote-mark">"</div>
-      <div class="stars">★★★★★</div>
-      <p class="testimonial-text">The telehealth option made it possible for me to access expert care without disrupting my work schedule. Maria is incredibly thorough and responsive. I finally feel supported on this journey.</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">R</div>
+    <div class="testi-card reveal reveal-delay-4">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">The telehealth option made expert care accessible without disrupting my work life. Maria is incredibly thorough and responsive. For the first time in years, I feel truly supported on this journey.</p>
+      <div class="testi-author">
+        <div class="tauth-ava">R</div>
         <div>
-          <div class="author-name">Robert K.</div>
-          <div class="author-role">Telehealth Patient · Riverside, CA</div>
+          <div class="tauth-name">Robert K.</div>
+          <div class="tauth-loc">Telehealth Patient · Riverside, CA</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- ═══════════════ CTA ═══════════════ -->
 <section class="cta-section">
-  <span class="section-label">Take the First Step</span>
-  <h2>You Deserve a Path<br>Forward. We're Here.</h2>
-  <p>Recovery is possible. Contact our compassionate team today for a confidential consultation — no judgment, just help.</p>
-  <a href="tel:9095550182" class="btn-primary">📞 Call (909) 555-0182</a>
+  <div class="cta-orb-1"></div>
+  <div class="cta-orb-2"></div>
+  <div class="cta-content">
+    <div class="sec-kicker" style="justify-content:center; margin-bottom:1.5rem">
+      <div class="sec-kicker-dot" style="background:var(--gold)"></div>
+      <div class="sec-kicker-text" style="color:var(--gold)">Take the First Step</div>
+    </div>
+    <h2>You Deserve a Path<br>Forward. <em>We're Here.</em></h2>
+    <p>Recovery is possible. Contact our compassionate team today for a confidential consultation — no judgment, only expert care.</p>
+    <div class="cta-buttons">
+      <a href="tel:9095550182" class="btn-gold"><span>📞 Call (909) 555-0182</span></a>
+      <a href="mailto:care@clarityhealth.com" class="btn-ghost" style="color:rgba(255,255,255,0.6)">
+        Email Our Team
+        <div class="btn-ghost-arrow">→</div>
+      </a>
+    </div>
+    <div class="cta-phone" style="justify-content:center">
+      <span>24/7 Crisis Helpline:</span>
+      <strong>1-800-662-HELP (4357)</strong>
+    </div>
+  </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <div class="logo">Clarity<span style="color:var(--gold)">Health</span></div>
+  <div class="footer-crisis">
+    <div>
+      <p>If you or someone you know is in crisis, please call the SAMHSA National Helpline</p>
+      <strong>1-800-662-HELP (4357) — Free, Confidential, 24/7</strong>
+    </div>
+    <a href="tel:18006624357" class="btn-gold"><span>Call Now</span></a>
+  </div>
+  <div class="footer-grid">
+    <div>
+      <a href="#" class="footer-brand-logo">Clarity<span>Health</span></a>
       <p>Board-certified addiction medicine serving Redlands and the greater Inland Empire since 2009. We believe recovery is possible for everyone.</p>
-      <div class="accreditation-badges" style="margin-top:1.2rem">
-        <div class="acc-badge">CARF Accredited</div>
-        <div class="acc-badge">ASAM Member</div>
-        <div class="acc-badge">SAMHSA Certified</div>
+      <div class="footer-acc">
+        <div class="footer-acc-tag">CARF Accredited</div>
+        <div class="footer-acc-tag">ASAM Member</div>
+        <div class="footer-acc-tag">SAMHSA</div>
+        <div class="footer-acc-tag">ABAM Certified</div>
       </div>
     </div>
     <div class="footer-col">
@@ -908,8 +1351,8 @@
     <div class="footer-col">
       <h4>Contact</h4>
       <ul>
-        <li><a href="#">(909) 555-0182</a></li>
-        <li><a href="#">care@clarityhealth.com</a></li>
+        <li><a href="tel:9095550182">(909) 555-0182</a></li>
+        <li><a href="mailto:care@clarityhealth.com">care@clarityhealth.com</a></li>
         <li><a href="#">350 E Citrus Ave, Ste 200</a></li>
         <li><a href="#">Redlands, CA 92373</a></li>
         <li style="margin-top:0.8rem"><a href="#">Patient Portal</a></li>
@@ -918,8 +1361,8 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 Clarity Health Addiction Medicine. All rights reserved.</span>
-    <div style="display:flex;gap:1.5rem">
+    <p>© 2025 Clarity Health Addiction Medicine. All rights reserved.</p>
+    <div class="footer-legal">
       <a href="#">Privacy Policy</a>
       <a href="#">HIPAA Notice</a>
       <a href="#">Terms of Use</a>
@@ -927,5 +1370,98 @@
   </div>
 </footer>
 
+<script>
+// ── CUSTOM CURSOR ──
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animateCursor() {
+  rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%,-50%) scale(1.8)'; ring.style.borderColor = 'rgba(212,168,83,0.8)'; });
+  el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.borderColor = 'rgba(212,168,83,0.5)'; });
+});
+
+// ── PARTICLE CANVAS ──
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
+    this.alpha = Math.random() * 0.3 + 0.05;
+    this.r = Math.random() * 1.5 + 0.5;
+    this.color = Math.random() > 0.7 ? '#d4a853' : '#0fa990';
+  }
+  update() {
+    this.x += this.vx; this.y += this.vy;
+    if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = this.color;
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fill(); ctx.restore();
+  }
+}
+
+for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+// Connect nearby particles
+function drawConnections() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 100) {
+        ctx.save();
+        ctx.globalAlpha = (1 - d/100) * 0.04;
+        ctx.strokeStyle = '#0fa990';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke(); ctx.restore();
+      }
+    }
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => { p.update(); p.draw(); });
+  drawConnections();
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ── NAV SCROLL ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── SCROLL REVEAL ──
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
