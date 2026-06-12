@@ -48,8 +48,93 @@ body {
   transition: all 0.18s ease;
 }
 
+/* ── HERO IMAGE SIDE ── */
+.hero {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 0 !important;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* LEFT column: image */
+.hero-image-side {
+  position: relative; z-index: 2;
+  height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 6rem 3rem 4rem 6%;
+  /* Subtle inner glow matching image dark navy */
+  background: linear-gradient(135deg, rgba(10,22,40,0.6) 0%, transparent 60%);
+}
+.hero-img-wrap {
+  position: relative; width: 100%; max-width: 460px;
+}
+.hero-img {
+  width: 100%;
+  border-radius: 24px;
+  display: block;
+  box-shadow:
+    0 32px 80px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(212,168,83,0.15),
+    0 0 60px rgba(212,168,83,0.08);
+  animation: imgFloat 6s ease-in-out infinite;
+}
+@keyframes imgFloat {
+  0%,100% { transform: translateY(0px); }
+  50%      { transform: translateY(-12px); }
+}
+/* Floating credential badge on image */
+.hero-img-badge {
+  position: absolute; bottom: 2rem; right: -1.5rem;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: var(--ink); border-radius: 14px;
+  padding: 1rem 1.4rem; text-align: center;
+  box-shadow: 0 12px 32px rgba(212,168,83,0.4);
+  animation: imgFloat 6s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+.hib-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 600; line-height: 1;
+}
+.hib-label { font-size: 0.65rem; letter-spacing: 0.08em; margin-top: 0.2rem; opacity: 0.8; }
+
+/* Decorative gold accent line beside image */
+.hero-img-accent-line {
+  position: absolute; left: -1.5rem; top: 15%; height: 60%;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  border-radius: 2px;
+}
+
+/* RIGHT column: text — override old single-column styles */
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 8rem 7% 4rem 4%;
+  max-width: 100%;
+}
+
 /* ── CANVAS BACKGROUND ── */
 #bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* ── NAV SYMBOL (top-right logo icon) ── */
+.nav-symbol {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(212,168,83,0.35);
+  background: rgba(212,168,83,0.06);
+  display: flex; align-items: center; justify-content: center;
+  padding: 6px;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.nav-symbol:hover {
+  background: rgba(212,168,83,0.14);
+  border-color: rgba(212,168,83,0.7);
+  transform: rotate(12deg) scale(1.08);
+}
+.nav-symbol svg { width: 100%; height: 100%; }
 
 /* ── NOISE OVERLAY ── */
 body::after {
@@ -116,10 +201,7 @@ nav.scrolled {
    HERO
    ================================================================ */
 .hero {
-  min-height: 100vh; position: relative;
-  display: flex; align-items: center;
-  padding: 10rem 7% 6rem;
-  overflow: hidden;
+  position: relative;
 }
 
 /* Orbs */
@@ -151,16 +233,7 @@ nav.scrolled {
   50% { transform: translate(50px, -30px) scale(1.1); }
 }
 
-/* Hero Line Art SVG */
-.hero-line-art {
-  position: absolute; right: 5%; top: 50%;
-  transform: translateY(-50%);
-  width: 480px; height: 480px; opacity: 0.06;
-  pointer-events: none;
-}
-
-/* Hero Content */
-.hero-content { position: relative; z-index: 2; max-width: 780px; }
+/* Hero Content (right side) is defined above in the cursor/image block */
 .hero-kicker { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.2rem; }
 .kicker-line { width: 48px; height: 1px; background: var(--gold); }
 .kicker-text {
@@ -765,6 +838,10 @@ footer {
    RESPONSIVE
    ================================================================ */
 @media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr !important; }
+  .hero-image-side { height: auto; padding: 8rem 5% 2rem; }
+  .hero-img-wrap { max-width: 340px; margin: 0 auto; }
+  .hero-content { padding: 2rem 5% 5rem; }
   .about-section, .locations-grid { grid-template-columns: 1fr; }
   .services-grid, .doctors-scroll, .testi-grid { grid-template-columns: 1fr 1fr; }
   .about-right { min-height: 400px; }
@@ -780,4 +857,5 @@ footer {
   .hstat { padding-right: 1rem; margin-right: 1rem; }
   .hstat-num { font-size: 2rem; }
   .footer-grid { grid-template-columns: 1fr; }
+  .hero-img-badge { right: 0; bottom: 1rem; }
 }
