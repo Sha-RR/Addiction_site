@@ -8,23 +8,19 @@
 </head>
 <body>
 
-  <!-- ── CUSTOM CURSOR ── -->
+  <!-- CURSOR -->
   <div id="cursor">
     <div class="cursor-ring" id="cursorRing"></div>
     <div class="cursor-dot"  id="cursorDot"></div>
   </div>
 
-  <!-- ── PARTICLE BACKGROUND ── -->
+  <!-- PARTICLE BG -->
   <canvas id="bg-canvas"></canvas>
 
-  <!-- ════════════════════════════════════════
-       NAV
-  ════════════════════════════════════════ -->
+  <!-- ═══════════ NAV ═══════════ -->
   <nav id="mainNav">
-    <a href="#" class="nav-logo">
-      Clarity<span class="logo-accent"></span>Health
-    </a>
-    <ul class="nav-center">
+    <a href="#" class="nav-logo">Clarity<span class="logo-dot"></span>Health</a>
+    <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#doctors">Physicians</a></li>
@@ -34,29 +30,27 @@
     <div class="nav-right">
       <span class="nav-phone">(909) 555-0182</span>
       <a href="#contact" class="nav-btn">Book Now</a>
-      <!-- Logo symbol top-right matching the brand image -->
-      <div class="nav-symbol">
-        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Outer gold circle -->
-          <circle cx="30" cy="30" r="28" stroke="url(#goldGrad)" stroke-width="1.5"/>
-          <!-- Inner circle -->
-          <circle cx="30" cy="30" r="20" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.5"/>
-          <!-- Face silhouette (side profile) -->
-          <path d="M34 14 C38 14 42 18 42 24 C42 30 38 35 34 37 L34 44 C34 45 33 46 32 46 L28 46 C27 46 26 45 26 44 L26 40 C22 39 19 36 19 32 C19 26 23 20 28 17 Z"
-                fill="url(#goldGrad)" opacity="0.25"/>
-          <!-- Brain outline (simplified) -->
-          <path d="M26 22 C24 20 22 21 22 24 C20 24 19 26 20 28 C19 29 19 31 21 32 C21 34 23 35 25 34 C26 36 28 36 30 35 C32 36 34 35 35 33 C37 33 38 31 37 29 C38 27 37 25 35 25 C35 22 33 20 30 21 C29 19 27 19 26 22Z"
-                stroke="url(#goldGrad)" stroke-width="1" fill="none" opacity="0.9"/>
-          <!-- Leaf stem -->
-          <path d="M28 35 C27 38 25 42 22 44" stroke="url(#goldGrad)" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
+      <div class="nav-symbol" title="Narinder Singh MD Inc">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="26" stroke="url(#ng1)" stroke-width="1.4"/>
+          <circle cx="28" cy="28" r="19" stroke="url(#ng1)" stroke-width="0.7" opacity="0.5"/>
+          <!-- Face profile -->
+          <path d="M32 12 C37 13 41 18 41 24 C41 30 37 35 32 37 L32 43 C32 44.1 31.1 45 30 45 L26 45 C24.9 45 24 44.1 24 43 L24 39 C20 37.5 17 33.5 17 29 C17 22 22 15 28 13 Z"
+                fill="url(#ng1)" opacity="0.18"/>
+          <!-- Brain -->
+          <path d="M24 21 C22 19 20 20 20 23 C18 23.5 17 25.5 18.5 27 C17.5 28.5 18 30.5 20 31 C20.5 33 22.5 33.5 24 32.5 C25 34.5 27.5 34.5 29.5 33.5 C31.5 34.5 33.5 33 34 31 C36 30.5 36.5 28 35.5 26.5 C36.5 24.5 35 22.5 33 22.5 C32.5 20 30.5 18.5 28 19.5 C27 17.5 25 17.5 24 21Z"
+                stroke="url(#ng1)" stroke-width="1.1" fill="none" opacity="0.95"/>
+          <!-- Stem -->
+          <path d="M26 33 C25 36.5 23 40 20 42" stroke="url(#ng1)" stroke-width="1.2" stroke-linecap="round"/>
           <!-- Leaves -->
-          <ellipse cx="24" cy="40" rx="4" ry="2" transform="rotate(-30 24 40)" fill="url(#goldGrad)" opacity="0.5"/>
-          <ellipse cx="21" cy="43" rx="3" ry="1.5" transform="rotate(20 21 43)" fill="url(#goldGrad)" opacity="0.4"/>
-          <!-- Star dots -->
-          <circle cx="36" cy="17" r="0.8" fill="url(#goldGrad)" opacity="0.7"/>
-          <circle cx="39" cy="20" r="0.5" fill="url(#goldGrad)" opacity="0.5"/>
+          <ellipse cx="22" cy="38.5" rx="4.5" ry="2" transform="rotate(-35 22 38.5)" fill="url(#ng1)" opacity="0.55"/>
+          <ellipse cx="19" cy="41.5" rx="3.5" ry="1.6" transform="rotate(18 19 41.5)" fill="url(#ng1)" opacity="0.4"/>
+          <!-- Dots -->
+          <circle cx="35" cy="16" r="0.9" fill="url(#ng1)" opacity="0.8"/>
+          <circle cx="38" cy="19" r="0.55" fill="url(#ng1)" opacity="0.55"/>
+          <circle cx="36.5" cy="13.5" r="0.45" fill="url(#ng1)" opacity="0.4"/>
           <defs>
-            <linearGradient id="goldGrad" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+            <linearGradient id="ng1" x1="0" y1="0" x2="56" y2="56" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#d4a853"/>
               <stop offset="100%" stop-color="#f0cc7a"/>
             </linearGradient>
@@ -66,688 +60,364 @@
     </div>
   </nav>
 
-  <!-- ════════════════════════════════════════
-       HERO  (image left · text right)
-  ════════════════════════════════════════ -->
-  <section class="hero">
-
-    <!-- Ambient orbs -->
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero" id="home">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
 
-    <!-- LEFT — brand image -->
-    <div class="hero-image-side">
+    <!-- LEFT: Image -->
+    <div class="hero-left">
       <div class="hero-img-wrap">
+        <div class="hero-img-glow"></div>
         <img src="hero-image.jpg" alt="Compassionate Care. Comprehensive Wellness." class="hero-img"/>
-        <!-- floating credential badge -->
         <div class="hero-img-badge">
-          <div class="hib-num">ABAM</div>
-          <div class="hib-label">Board Certified</div>
+          <div class="hib-main">ABAM</div>
+          <div class="hib-sub">Board Certified</div>
         </div>
-        <!-- floating accent line -->
-        <div class="hero-img-accent-line"></div>
+        <div class="hero-img-line"></div>
       </div>
     </div>
 
-    <!-- RIGHT — text content -->
-    <div class="hero-content">
+    <!-- RIGHT: Text -->
+    <div class="hero-right">
       <div class="hero-kicker">
-        <div class="kicker-line"></div>
-        <div class="kicker-text">Board-Certified Addiction Medicine · Inland Empire</div>
+        <div class="kicker-bar"></div>
+        <span>Board-Certified Addiction Medicine · Inland Empire</span>
       </div>
 
       <h1>
-        <span class="line"><span>Where</span></span>
-        <span class="line"><span>Healing <em>Begins</em></span></span>
-        <span class="line"><span>With Dignity</span></span>
+        <span class="reveal-line"><span>Where</span></span>
+        <span class="reveal-line"><span>Healing <em>Begins</em></span></span>
+        <span class="reveal-line"><span>With Dignity</span></span>
       </h1>
 
       <p class="hero-sub">
-        Clarity Health delivers compassionate, evidence-based addiction medicine to guide
-        patients through recovery with clinical excellence and unwavering respect.
+        Clarity Health delivers compassionate, evidence-based addiction medicine to
+        guide patients through recovery with clinical excellence and unwavering respect.
       </p>
 
       <div class="hero-actions">
         <a href="#contact" class="btn-gold"><span>Schedule a Consultation</span></a>
         <a href="#services" class="btn-ghost">
-          Explore Services
-          <div class="btn-ghost-arrow">→</div>
+          Explore Services <div class="ghost-arrow">→</div>
         </a>
       </div>
 
       <div class="hero-stats">
-        <div class="hstat">
-          <div class="hstat-num">2,400+</div>
-          <div class="hstat-label">Patients Treated</div>
-        </div>
-        <div class="hstat">
-          <div class="hstat-num">94%</div>
-          <div class="hstat-label">Recovery Rate</div>
-        </div>
-        <div class="hstat">
-          <div class="hstat-num">6</div>
-          <div class="hstat-label">Expert Clinicians</div>
-        </div>
-        <div class="hstat">
-          <div class="hstat-num">15+</div>
-          <div class="hstat-label">Years of Practice</div>
-        </div>
+        <div class="hstat"><div class="hstat-n">2,400+</div><div class="hstat-l">Patients Treated</div></div>
+        <div class="hstat"><div class="hstat-n">94%</div><div class="hstat-l">Recovery Rate</div></div>
+        <div class="hstat"><div class="hstat-n">6</div><div class="hstat-l">Expert Clinicians</div></div>
+        <div class="hstat"><div class="hstat-n">15+</div><div class="hstat-l">Years of Practice</div></div>
       </div>
     </div>
 
-    <div class="scroll-indicator">
+    <div class="scroll-cue">
       <div class="scroll-line"></div>
-      <div class="scroll-text">Scroll</div>
+      <span>Scroll</span>
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════
-       MARQUEE
-  ════════════════════════════════════════ -->
+  <!-- ═══════════ MARQUEE ═══════════ -->
   <div class="marquee-wrap">
     <div class="marquee-track">
-      <!-- Repeated twice for seamless infinite loop -->
-      <span class="marquee-item"><span class="marquee-dot"></span>Opioid Use Disorder</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Alcohol Dependence</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Medication-Assisted Treatment</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Dual Diagnosis</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Medical Detoxification</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Intensive Outpatient</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Telehealth Services</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Relapse Prevention</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Stimulant Use Disorder</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Trauma-Informed Care</span>
-      <!-- Duplicate set -->
-      <span class="marquee-item"><span class="marquee-dot"></span>Opioid Use Disorder</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Alcohol Dependence</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Medication-Assisted Treatment</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Dual Diagnosis</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Medical Detoxification</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Intensive Outpatient</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Telehealth Services</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Relapse Prevention</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Stimulant Use Disorder</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Trauma-Informed Care</span>
+      <span class="mi"><span class="md"></span>Opioid Use Disorder</span>
+      <span class="mi"><span class="md"></span>Alcohol Dependence</span>
+      <span class="mi"><span class="md"></span>Medication-Assisted Treatment</span>
+      <span class="mi"><span class="md"></span>Dual Diagnosis</span>
+      <span class="mi"><span class="md"></span>Medical Detoxification</span>
+      <span class="mi"><span class="md"></span>Intensive Outpatient</span>
+      <span class="mi"><span class="md"></span>Telehealth Services</span>
+      <span class="mi"><span class="md"></span>Relapse Prevention</span>
+      <span class="mi"><span class="md"></span>Stimulant Use Disorder</span>
+      <span class="mi"><span class="md"></span>Trauma-Informed Care</span>
+      <span class="mi"><span class="md"></span>Opioid Use Disorder</span>
+      <span class="mi"><span class="md"></span>Alcohol Dependence</span>
+      <span class="mi"><span class="md"></span>Medication-Assisted Treatment</span>
+      <span class="mi"><span class="md"></span>Dual Diagnosis</span>
+      <span class="mi"><span class="md"></span>Medical Detoxification</span>
+      <span class="mi"><span class="md"></span>Intensive Outpatient</span>
+      <span class="mi"><span class="md"></span>Telehealth Services</span>
+      <span class="mi"><span class="md"></span>Relapse Prevention</span>
+      <span class="mi"><span class="md"></span>Stimulant Use Disorder</span>
+      <span class="mi"><span class="md"></span>Trauma-Informed Care</span>
     </div>
   </div>
 
-  <!-- ════════════════════════════════════════
-       ABOUT
-  ════════════════════════════════════════ -->
-  <section class="about-section" id="about">
+  <!-- ═══════════ BRAND CARD (Narinder Singh MD Inc) ═══════════ -->
+  <section class="brand-section" id="about">
+    <div class="brand-left">
+      <!-- Navy wave + gold lines matching Image 2 -->
+      <div class="brand-wave-bg"></div>
+      <svg class="brand-wave-svg" viewBox="0 0 320 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Main navy shape -->
+        <path d="M0 0 L220 0 C180 80 160 160 200 250 C240 340 220 420 180 500 L0 500 Z" fill="#0a1628"/>
+        <!-- Gold accent curve 1 -->
+        <path d="M200 0 C160 80 140 170 185 260 C225 345 210 430 170 500"
+              stroke="#c9a94e" stroke-width="1.5" fill="none" opacity="0.85"/>
+        <!-- Gold accent curve 2 -->
+        <path d="M215 0 C175 85 155 175 198 268 C238 352 222 435 182 500"
+              stroke="#c9a94e" stroke-width="0.7" fill="none" opacity="0.45"/>
+        <!-- Gold accent curve 3 (thin) -->
+        <path d="M230 0 C190 90 170 180 212 275 C252 360 234 440 195 500"
+              stroke="#e8c870" stroke-width="0.4" fill="none" opacity="0.3"/>
+      </svg>
+    </div>
 
-    <div class="about-left">
-      <div class="about-label">
-        <div class="about-label-line"></div>
-        <div class="about-label-text">Who We Are</div>
+    <div class="brand-right">
+      <!-- Corner ornaments -->
+      <div class="corner corner-tl">
+        <svg viewBox="0 0 30 30" fill="none"><path d="M2 28 L2 2 L28 2" stroke="#c9a94e" stroke-width="1.2"/><rect x="12" y="12" width="6" height="6" transform="rotate(45 15 15)" fill="none" stroke="#c9a94e" stroke-width="1"/></svg>
       </div>
-      <h2 class="reveal">A New Standard<br>in <em>Addiction Medicine</em></h2>
-      <p class="reveal reveal-delay-1">
-        Clarity Health was founded on the conviction that addiction is a complex medical
-        condition — not a moral failing. Our multidisciplinary team unites clinical precision
-        with deep empathy.
-      </p>
-      <p class="reveal reveal-delay-2">
-        Serving patients across the Inland Empire, we deliver individualized treatment
-        integrating medication-assisted therapy, psychotherapy, and comprehensive wellness
-        strategies for sustainable recovery.
-      </p>
-      <div class="about-values reveal reveal-delay-3">
-        <div class="aval">
-          <div class="aval-icon">🏥</div>
-          <h4>Evidence-Based</h4>
-          <p>All protocols follow SAMHSA &amp; ASAM clinical guidelines.</p>
+      <div class="corner corner-tr">
+        <svg viewBox="0 0 30 30" fill="none"><path d="M2 2 L28 2 L28 28" stroke="#c9a94e" stroke-width="1.2"/><rect x="12" y="12" width="6" height="6" transform="rotate(45 15 15)" fill="none" stroke="#c9a94e" stroke-width="1"/></svg>
+      </div>
+      <div class="corner corner-bl">
+        <svg viewBox="0 0 30 30" fill="none"><path d="M2 2 L2 28 L28 28" stroke="#c9a94e" stroke-width="1.2"/><rect x="12" y="12" width="6" height="6" transform="rotate(45 15 15)" fill="none" stroke="#c9a94e" stroke-width="1"/></svg>
+      </div>
+      <div class="corner corner-br">
+        <svg viewBox="0 0 30 30" fill="none"><path d="M28 2 L28 28 L2 28" stroke="#c9a94e" stroke-width="1.2"/><rect x="12" y="12" width="6" height="6" transform="rotate(45 15 15)" fill="none" stroke="#c9a94e" stroke-width="1"/></svg>
+      </div>
+
+      <div class="brand-content">
+        <!-- Top ornament rule -->
+        <div class="brand-rule">
+          <div class="brand-rule-line"></div>
+          <svg class="brand-rule-diamond" viewBox="0 0 14 14" fill="none">
+            <rect x="1" y="1" width="12" height="12" transform="rotate(45 7 7)" fill="#c9a94e"/>
+          </svg>
+          <div class="brand-rule-line"></div>
         </div>
-        <div class="aval">
-          <div class="aval-icon">🤍</div>
-          <h4>Whole-Person</h4>
-          <p>Mind, body, and spirit addressed as one integrated system.</p>
+
+        <h2 class="brand-name">Narinder Singh MD Inc</h2>
+        <p class="brand-subtitle">A Professional Corporation</p>
+
+        <!-- Bottom ornament rule -->
+        <div class="brand-rule">
+          <div class="brand-rule-line"></div>
+          <svg class="brand-rule-diamond" viewBox="0 0 14 14" fill="none">
+            <rect x="1" y="1" width="12" height="12" transform="rotate(45 7 7)" fill="#c9a94e"/>
+          </svg>
+          <div class="brand-rule-line"></div>
         </div>
-        <div class="aval">
-          <div class="aval-icon">🔒</div>
-          <h4>Confidential</h4>
-          <p>HIPAA-compliant, stigma-free environment, every visit.</p>
-        </div>
-        <div class="aval">
-          <div class="aval-icon">🌐</div>
-          <h4>Accessible</h4>
-          <p>Most major insurance plans accepted; telehealth statewide.</p>
+
+        <div class="brand-tagline">Compassionate Care. Comprehensive Wellness.</div>
+        <div class="brand-details">
+          <span>Board-Certified Addiction Medicine</span>
+          <span class="bdot">·</span>
+          <span>Inland Empire, CA</span>
         </div>
       </div>
     </div>
-
-    <div class="about-right">
-      <div class="about-right-bg"></div>
-      <div class="about-right-grid"></div>
-      <div class="about-big-num">15</div>
-      <div class="about-badges reveal">
-        <div class="abadge">
-          <div class="abadge-num">2,400+</div>
-          <div class="abadge-label">Patients Treated</div>
-        </div>
-        <div class="abadge">
-          <div class="abadge-num">94%</div>
-          <div class="abadge-label">Recovery Success</div>
-        </div>
-        <div class="abadge">
-          <div class="abadge-num">6</div>
-          <div class="abadge-label">Expert Clinicians</div>
-        </div>
-        <div class="abadge">
-          <div class="abadge-num">2</div>
-          <div class="abadge-label">Clinic Locations</div>
-        </div>
-      </div>
-      <div class="about-cert reveal reveal-delay-2">
-        <span class="cert-tag">CARF Accredited</span>
-        <span class="cert-tag">ASAM Member</span>
-        <span class="cert-tag">SAMHSA Certified</span>
-        <span class="cert-tag">ABAM Board Certified</span>
-      </div>
-    </div>
-
   </section>
 
-  <!-- ════════════════════════════════════════
-       SERVICES
-  ════════════════════════════════════════ -->
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section class="about-section">
+    <div class="about-left">
+      <div class="about-label"><div class="al-line"></div><span>Who We Are</span></div>
+      <h2 class="reveal">A New Standard<br>in <em>Addiction Medicine</em></h2>
+      <p class="reveal rev2">Clarity Health was founded on the conviction that addiction is a complex medical condition — not a moral failing. Our multidisciplinary team unites clinical precision with deep empathy.</p>
+      <p class="reveal rev3">Serving patients across the Inland Empire, we deliver individualized treatment integrating medication-assisted therapy, psychotherapy, and wellness strategies for sustainable recovery.</p>
+      <div class="about-values reveal rev4">
+        <div class="aval"><div class="av-icon">🏥</div><h4>Evidence-Based</h4><p>SAMHSA &amp; ASAM clinical guidelines.</p></div>
+        <div class="aval"><div class="av-icon">🤍</div><h4>Whole-Person</h4><p>Mind, body, and spirit as one.</p></div>
+        <div class="aval"><div class="av-icon">🔒</div><h4>Confidential</h4><p>HIPAA-compliant, stigma-free.</p></div>
+        <div class="aval"><div class="av-icon">🌐</div><h4>Accessible</h4><p>Telehealth available statewide.</p></div>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="ar-bg"></div>
+      <div class="ar-grid"></div>
+      <div class="ar-bignum">15</div>
+      <div class="ar-badges reveal">
+        <div class="arb"><div class="arb-n">2,400+</div><div class="arb-l">Patients Treated</div></div>
+        <div class="arb"><div class="arb-n">94%</div><div class="arb-l">Recovery Success</div></div>
+        <div class="arb"><div class="arb-n">6</div><div class="arb-l">Expert Clinicians</div></div>
+        <div class="arb"><div class="arb-n">2</div><div class="arb-l">Clinic Locations</div></div>
+      </div>
+      <div class="ar-certs reveal rev3">
+        <span class="ct">CARF Accredited</span>
+        <span class="ct">ASAM Member</span>
+        <span class="ct">SAMHSA Certified</span>
+        <span class="ct">ABAM Board Certified</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SERVICES ═══════════ -->
   <section class="services-section" id="services">
-    <div class="section-header">
-      <div class="section-label-wrap">
-        <div class="sec-kicker">
-          <div class="sec-kicker-dot"></div>
-          <div class="sec-kicker-text">What We Offer</div>
-        </div>
+    <div class="sec-head">
+      <div>
+        <div class="sec-kicker"><span class="sk-dot"></span><span>What We Offer</span></div>
         <h2 class="sec-title reveal">Comprehensive<br><em>Treatment Services</em></h2>
       </div>
-      <p class="reveal reveal-delay-2">
-        From first evaluation to long-term recovery maintenance — we cover the full
-        continuum of addiction care.
-      </p>
+      <p class="reveal rev3">From first evaluation to long-term recovery maintenance — full continuum of care.</p>
     </div>
-
-    <div class="services-grid reveal">
-
-      <div class="svc-card">
-        <div class="svc-num">01</div>
-        <div class="svc-icon-wrap">💊</div>
-        <h3>Medication-Assisted Treatment</h3>
-        <p>Buprenorphine/naloxone, naltrexone, and methadone programs for opioid and alcohol
-           use disorders under close physician supervision and ongoing monitoring.</p>
-        <a href="#" class="svc-link">Learn More →</a>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-num">02</div>
-        <div class="svc-icon-wrap">🧠</div>
-        <h3>Dual Diagnosis Treatment</h3>
-        <p>Co-occurring depression, anxiety, PTSD, and bipolar disorders treated alongside
-           addiction by our integrated behavioral health and medical teams.</p>
-        <a href="#" class="svc-link">Learn More →</a>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-num">03</div>
-        <div class="svc-icon-wrap">🤝</div>
-        <h3>Intensive Outpatient (IOP)</h3>
-        <p>Structured group therapy, individual counseling, and medical check-ins —
-           comprehensive treatment without requiring inpatient admission.</p>
-        <a href="#" class="svc-link">Learn More →</a>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-num">04</div>
-        <div class="svc-icon-wrap">🔬</div>
-        <h3>Medical Detoxification</h3>
-        <p>Physician-supervised withdrawal management for alcohol, opioids, benzodiazepines,
-           and stimulants — minimizing discomfort and medical risk safely.</p>
-        <a href="#" class="svc-link">Learn More →</a>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-num">05</div>
-        <div class="svc-icon-wrap">💻</div>
-        <h3>Telehealth Services</h3>
-        <p>Secure video appointments for medication management, therapy, and follow-up
-           consultations — accessible from anywhere across California.</p>
-        <a href="#" class="svc-link">Learn More →</a>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-num">06</div>
-        <div class="svc-icon-wrap">🌱</div>
-        <h3>Aftercare &amp; Relapse Prevention</h3>
-        <p>Alumni groups, ongoing medication management, wellness coaching, and community
-           referrals to build and sustain long-term sobriety.</p>
-        <a href="#" class="svc-link">Learn More →</a>
-      </div>
-
+    <div class="svc-grid reveal">
+      <div class="svc"><div class="svc-n">01</div><div class="svc-ico">💊</div><h3>Medication-Assisted Treatment</h3><p>Buprenorphine/naloxone, naltrexone, and methadone programs under close physician supervision.</p><a href="#" class="svc-lnk">Learn More →</a></div>
+      <div class="svc"><div class="svc-n">02</div><div class="svc-ico">🧠</div><h3>Dual Diagnosis Treatment</h3><p>Co-occurring depression, anxiety, PTSD, and bipolar disorders treated alongside addiction.</p><a href="#" class="svc-lnk">Learn More →</a></div>
+      <div class="svc"><div class="svc-n">03</div><div class="svc-ico">🤝</div><h3>Intensive Outpatient (IOP)</h3><p>Structured group therapy, individual counseling, and medical check-ins without inpatient admission.</p><a href="#" class="svc-lnk">Learn More →</a></div>
+      <div class="svc"><div class="svc-n">04</div><div class="svc-ico">🔬</div><h3>Medical Detoxification</h3><p>Physician-supervised withdrawal management for alcohol, opioids, benzodiazepines, and stimulants.</p><a href="#" class="svc-lnk">Learn More →</a></div>
+      <div class="svc"><div class="svc-n">05</div><div class="svc-ico">💻</div><h3>Telehealth Services</h3><p>Secure video appointments accessible from anywhere across California.</p><a href="#" class="svc-lnk">Learn More →</a></div>
+      <div class="svc"><div class="svc-n">06</div><div class="svc-ico">🌱</div><h3>Aftercare &amp; Relapse Prevention</h3><p>Alumni groups, wellness coaching, and community referrals for long-term sobriety.</p><a href="#" class="svc-lnk">Learn More →</a></div>
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════
-       DOCTORS
-  ════════════════════════════════════════ -->
+  <!-- ═══════════ DOCTORS ═══════════ -->
   <section class="doctors-section" id="doctors">
-    <div class="doctors-header">
-      <div class="sec-kicker">
-        <div class="sec-kicker-dot" style="background:var(--gold)"></div>
-        <div class="sec-kicker-text" style="color:var(--gold)">Our Care Team</div>
-      </div>
-      <h2 class="sec-title reveal">Meet Your <em>Physicians</em></h2>
-    </div>
-
-    <div class="doctors-scroll">
-
-      <!-- Dr. Marcus J. Reyes -->
-      <div class="doc-card reveal">
-        <div class="doc-photo-area">
-          <div class="doc-photo-glow"></div>
-          <div class="doc-initials">MR</div>
-          <div class="doc-specialty-badge">Medical Director</div>
-        </div>
+    <div class="sec-kicker" style="margin-bottom:1rem"><span class="sk-dot" style="background:var(--gold)"></span><span style="color:var(--gold)">Our Care Team</span></div>
+    <h2 class="sec-title reveal">Meet Your <em>Physicians</em></h2>
+    <div class="doc-grid">
+      <div class="doc reveal">
+        <div class="doc-photo"><div class="doc-glow"></div><div class="doc-init">NS</div><div class="doc-badge">Medical Director</div></div>
         <div class="doc-body">
-          <div class="doc-name">Dr. Marcus J. Reyes, MD</div>
+          <div class="doc-name">Dr. Narinder Singh, MD</div>
           <div class="doc-title">Board-Certified Addiction Medicine · Internal Medicine</div>
-          <div class="doc-bio">
-            18 years of experience in addiction and internal medicine. UCLA School of Medicine
-            graduate; addiction medicine fellowship at UCSF. Active ASAM &amp; CSAM member.
-          </div>
-          <div class="doc-expertise">
-            <span class="exp-tag">Opioid Use Disorder</span>
-            <span class="exp-tag">Alcohol Dependence</span>
-            <span class="exp-tag">MAT</span>
-          </div>
+          <div class="doc-bio">Founder of Narinder Singh MD Inc. 18+ years of experience in addiction and internal medicine. ABAM board-certified. Active ASAM &amp; CSAM member serving the Inland Empire.</div>
+          <div class="doc-tags"><span>Opioid Use Disorder</span><span>Alcohol Dependence</span><span>MAT</span></div>
         </div>
       </div>
-
-      <!-- Dr. Priya Anand -->
-      <div class="doc-card reveal reveal-delay-1">
-        <div class="doc-photo-area">
-          <div class="doc-photo-glow"></div>
-          <div class="doc-initials">PA</div>
-          <div class="doc-specialty-badge">Psychiatry &amp; Addiction</div>
-        </div>
+      <div class="doc reveal rev2">
+        <div class="doc-photo"><div class="doc-glow"></div><div class="doc-init">PA</div><div class="doc-badge">Psychiatry &amp; Addiction</div></div>
         <div class="doc-body">
           <div class="doc-name">Dr. Priya Anand, MD, MPH</div>
           <div class="doc-title">Dual Board-Certified · Psychiatry &amp; Addiction Medicine</div>
-          <div class="doc-bio">
-            Trained at Stanford and Johns Hopkins. Specializes in co-occurring disorders with
-            a trauma-informed approach to every patient relationship.
-          </div>
-          <div class="doc-expertise">
-            <span class="exp-tag">Dual Diagnosis</span>
-            <span class="exp-tag">Trauma-Informed</span>
-            <span class="exp-tag">Mood Disorders</span>
-          </div>
+          <div class="doc-bio">Trained at Stanford and Johns Hopkins. Specializes in co-occurring disorders with a trauma-informed approach to every patient relationship.</div>
+          <div class="doc-tags"><span>Dual Diagnosis</span><span>Trauma-Informed</span><span>Mood Disorders</span></div>
         </div>
       </div>
-
-      <!-- Dr. Thomas W. Chen -->
-      <div class="doc-card reveal reveal-delay-2">
-        <div class="doc-photo-area">
-          <div class="doc-photo-glow"></div>
-          <div class="doc-initials">TC</div>
-          <div class="doc-specialty-badge">Family &amp; Addiction</div>
-        </div>
+      <div class="doc reveal rev3">
+        <div class="doc-photo"><div class="doc-glow"></div><div class="doc-init">TC</div><div class="doc-badge">Family &amp; Addiction</div></div>
         <div class="doc-body">
           <div class="doc-name">Dr. Thomas W. Chen, DO</div>
           <div class="doc-title">Associate Physician · Family &amp; Addiction Medicine</div>
-          <div class="doc-bio">
-            Brings an osteopathic whole-person approach. Graduate of Western University of
-            Health Sciences. Focuses on long-term recovery and community-based care.
-          </div>
-          <div class="doc-expertise">
-            <span class="exp-tag">Stimulant Disorders</span>
-            <span class="exp-tag">Wellness</span>
-            <span class="exp-tag">Telehealth</span>
-          </div>
+          <div class="doc-bio">Osteopathic whole-person approach. Graduate of Western University of Health Sciences. Focuses on long-term recovery and community-based care.</div>
+          <div class="doc-tags"><span>Stimulant Disorders</span><span>Wellness</span><span>Telehealth</span></div>
         </div>
       </div>
-
-      <!-- Dr. Renée L. Fontaine -->
-      <div class="doc-card reveal reveal-delay-1">
-        <div class="doc-photo-area">
-          <div class="doc-photo-glow"></div>
-          <div class="doc-initials">RF</div>
-          <div class="doc-specialty-badge">Addiction Fellow</div>
-        </div>
+      <div class="doc reveal rev2">
+        <div class="doc-photo"><div class="doc-glow"></div><div class="doc-init">RF</div><div class="doc-badge">Addiction Fellow</div></div>
         <div class="doc-body">
           <div class="doc-name">Dr. Renée L. Fontaine, MD</div>
           <div class="doc-title">Addiction Medicine Fellow · Loma Linda University</div>
-          <div class="doc-bio">
-            Internal medicine residency at Loma Linda University Medical Center. Special
-            interest in adolescent substance use and community prevention initiatives.
-          </div>
-          <div class="doc-expertise">
-            <span class="exp-tag">Adolescents</span>
-            <span class="exp-tag">Prevention</span>
-            <span class="exp-tag">Buprenorphine</span>
-          </div>
+          <div class="doc-bio">Internal medicine residency at Loma Linda. Special interest in adolescent substance use and community prevention initiatives.</div>
+          <div class="doc-tags"><span>Adolescents</span><span>Prevention</span><span>Buprenorphine</span></div>
         </div>
       </div>
-
-      <!-- Dr. Samuel O. Adeyemi -->
-      <div class="doc-card reveal reveal-delay-2">
-        <div class="doc-photo-area">
-          <div class="doc-photo-glow"></div>
-          <div class="doc-initials">SA</div>
-          <div class="doc-specialty-badge">Behavioral Health</div>
-        </div>
+      <div class="doc reveal rev3">
+        <div class="doc-photo"><div class="doc-glow"></div><div class="doc-init">SA</div><div class="doc-badge">Behavioral Health</div></div>
         <div class="doc-body">
           <div class="doc-name">Dr. Samuel O. Adeyemi, PhD</div>
           <div class="doc-title">Director of Behavioral Health · LMFT</div>
-          <div class="doc-bio">
-            Doctorate in clinical psychology. Oversees group therapy, CBT, and motivational
-            interviewing programs. Expert in family systems and long-term recovery coaching.
-          </div>
-          <div class="doc-expertise">
-            <span class="exp-tag">CBT</span>
-            <span class="exp-tag">Motivational Interviewing</span>
-            <span class="exp-tag">Group Therapy</span>
-          </div>
+          <div class="doc-bio">Doctorate in clinical psychology. Oversees CBT, motivational interviewing and group therapy. Expert in family systems and long-term recovery coaching.</div>
+          <div class="doc-tags"><span>CBT</span><span>Motivational Interviewing</span><span>Group Therapy</span></div>
         </div>
       </div>
-
-      <!-- Maria G. Torres -->
-      <div class="doc-card reveal reveal-delay-3">
-        <div class="doc-photo-area">
-          <div class="doc-photo-glow"></div>
-          <div class="doc-initials">MT</div>
-          <div class="doc-specialty-badge">Psychiatric NP</div>
-        </div>
+      <div class="doc reveal rev4">
+        <div class="doc-photo"><div class="doc-glow"></div><div class="doc-init">MT</div><div class="doc-badge">Psychiatric NP</div></div>
         <div class="doc-body">
           <div class="doc-name">Maria G. Torres, PMHNP-BC</div>
           <div class="doc-title">Psychiatric Nurse Practitioner · Board-Certified</div>
-          <div class="doc-bio">
-            A decade of experience in addiction and mental health settings. Manages medication
-            protocols and patient education across telehealth and outpatient programs.
-          </div>
-          <div class="doc-expertise">
-            <span class="exp-tag">Medication Mgmt</span>
-            <span class="exp-tag">Telehealth</span>
-            <span class="exp-tag">Patient Education</span>
-          </div>
+          <div class="doc-bio">A decade of experience in addiction and mental health. Manages medication protocols and patient education across telehealth and outpatient programs.</div>
+          <div class="doc-tags"><span>Medication Mgmt</span><span>Telehealth</span><span>Patient Education</span></div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════
-       LOCATIONS
-  ════════════════════════════════════════ -->
-  <section class="locations-section" id="location">
-    <div class="sec-kicker">
-      <div class="sec-kicker-dot"></div>
-      <div class="sec-kicker-text">Find Us</div>
-    </div>
-    <h2 class="sec-title reveal">Our <em>Locations</em></h2>
-
-    <div class="locations-grid">
-
+  <!-- ═══════════ LOCATIONS ═══════════ -->
+  <section class="loc-section" id="location">
+    <div class="sec-kicker" style="margin-bottom:1rem"><span class="sk-dot" style="background:var(--teal)"></span><span style="color:var(--teal)">Find Us</span></div>
+    <h2 class="sec-title reveal" style="color:var(--ink)"><em style="color:var(--teal)">Our</em> Locations</h2>
+    <div class="loc-grid">
       <div class="loc-cards">
-
-        <!-- Redlands -->
         <div class="loc-card reveal">
-          <div class="loc-card-header">
-            <h3>Redlands Main Clinic</h3>
-            <div class="loc-badge">Primary Location</div>
-          </div>
-          <div class="loc-detail">
-            <div class="loc-icon-box">📍</div>
-            <div>
-              <strong>Address</strong>
-              <span>350 E Citrus Ave, Suite 200<br>Redlands, CA 92373</span>
-            </div>
-          </div>
-          <div class="loc-detail">
-            <div class="loc-icon-box">🕐</div>
-            <div>
-              <strong>Hours</strong>
-              <span>Mon – Fri: 8:00 AM – 6:00 PM<br>Saturday: 9:00 AM – 1:00 PM</span>
-            </div>
-          </div>
-          <div class="loc-detail">
-            <div class="loc-icon-box">📞</div>
-            <div>
-              <strong>Phone</strong>
-              <span>(909) 555-0182</span>
-            </div>
-          </div>
-          <div class="loc-detail">
-            <div class="loc-icon-box">🚌</div>
-            <div>
-              <strong>Transit &amp; Parking</strong>
-              <span>Free on-site parking · Omnitrans Route 8 nearby</span>
-            </div>
-          </div>
+          <div class="lc-head"><h3>Redlands Main Clinic</h3><span class="lc-badge">Primary</span></div>
+          <div class="lc-row"><div class="lc-icon">📍</div><div><strong>Address</strong><span>350 E Citrus Ave, Suite 200<br>Redlands, CA 92373</span></div></div>
+          <div class="lc-row"><div class="lc-icon">🕐</div><div><strong>Hours</strong><span>Mon–Fri: 8:00 AM – 6:00 PM<br>Saturday: 9:00 AM – 1:00 PM</span></div></div>
+          <div class="lc-row"><div class="lc-icon">📞</div><div><strong>Phone</strong><span>(909) 555-0182</span></div></div>
+          <div class="lc-row"><div class="lc-icon">🚌</div><div><strong>Parking</strong><span>Free on-site · Omnitrans Route 8</span></div></div>
         </div>
-
-        <!-- San Bernardino -->
-        <div class="loc-card reveal reveal-delay-2">
-          <div class="loc-card-header">
-            <h3>San Bernardino Office</h3>
-            <div class="loc-badge" style="background:rgba(212,168,83,0.1);color:var(--gold);border-color:rgba(212,168,83,0.25)">
-              Satellite
-            </div>
-          </div>
-          <div class="loc-detail">
-            <div class="loc-icon-box">📍</div>
-            <div>
-              <strong>Address</strong>
-              <span>1735 Medical Center Dr, Suite 110<br>San Bernardino, CA 92411</span>
-            </div>
-          </div>
-          <div class="loc-detail">
-            <div class="loc-icon-box">🕐</div>
-            <div>
-              <strong>Hours</strong>
-              <span>Tuesday &amp; Thursday: 10:00 AM – 5:00 PM<br>By appointment only</span>
-            </div>
-          </div>
-          <div class="loc-detail">
-            <div class="loc-icon-box">📞</div>
-            <div>
-              <strong>Phone</strong>
-              <span>(909) 555-0247</span>
-            </div>
-          </div>
+        <div class="loc-card reveal rev3">
+          <div class="lc-head"><h3>San Bernardino Office</h3><span class="lc-badge lc-gold">Satellite</span></div>
+          <div class="lc-row"><div class="lc-icon">📍</div><div><strong>Address</strong><span>1735 Medical Center Dr, Suite 110<br>San Bernardino, CA 92411</span></div></div>
+          <div class="lc-row"><div class="lc-icon">🕐</div><div><strong>Hours</strong><span>Tue &amp; Thu: 10:00 AM – 5:00 PM<br>By appointment only</span></div></div>
+          <div class="lc-row"><div class="lc-icon">📞</div><div><strong>Phone</strong><span>(909) 555-0247</span></div></div>
         </div>
-
       </div>
-
-      <!-- Map area -->
-      <div class="loc-map-area reveal reveal-delay-2">
-        <div class="map-layer-grid"></div>
-        <div class="map-layer-glow"></div>
-        <div class="map-content">
-          <div class="map-pin-animated"></div>
+      <div class="loc-map reveal rev3">
+        <div class="map-grid"></div>
+        <div class="map-glow"></div>
+        <div class="map-body">
+          <div class="map-pin"></div>
           <h4>Redlands, California</h4>
           <p>350 E Citrus Ave, Suite 200<br>Redlands, CA 92373<br><br>Serving the Inland Empire</p>
-          <a href="https://maps.google.com/?q=350+E+Citrus+Ave+Redlands+CA"
-             target="_blank" rel="noopener" class="map-open-btn">
-            Open in Google Maps
-          </a>
+          <a href="https://maps.google.com/?q=350+E+Citrus+Ave+Redlands+CA" target="_blank" class="btn-gold" style="margin-top:1.5rem; display:inline-block"><span>Open in Google Maps</span></a>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════
-       TESTIMONIALS
-  ════════════════════════════════════════ -->
+  <!-- ═══════════ TESTIMONIALS ═══════════ -->
   <section class="testi-section" id="contact">
-    <div class="sec-kicker">
-      <div class="sec-kicker-dot"></div>
-      <div class="sec-kicker-text">Patient Stories</div>
-    </div>
+    <div class="sec-kicker" style="margin-bottom:1rem"><span class="sk-dot"></span><span>Patient Stories</span></div>
     <h2 class="sec-title reveal">Lives <em>Transformed</em></h2>
-
     <div class="testi-grid">
-
-      <div class="testi-card reveal">
-        <div class="testi-quote">"</div>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">
-          Dr. Reyes and his team gave me my life back. After years of struggling, I finally
-          found a practice that treated me with dignity. I am now three years sober and
-          couldn't be more grateful to Clarity Health.
-        </p>
-        <div class="testi-author">
-          <div class="tauth-ava">J</div>
-          <div>
-            <div class="tauth-name">James T.</div>
-            <div class="tauth-loc">Patient since 2021 · Redlands, CA</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card reveal reveal-delay-2">
-        <div class="testi-quote">"</div>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">
-          Dr. Anand truly understands how mental health and addiction are intertwined.
-          She took my anxiety seriously from day one and treated both simultaneously.
-          The care I've received is unlike anything I'd experienced before.
-        </p>
-        <div class="testi-author">
-          <div class="tauth-ava">S</div>
-          <div>
-            <div class="tauth-name">Sandra M.</div>
-            <div class="tauth-loc">Patient since 2022 · San Bernardino, CA</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card reveal reveal-delay-4">
-        <div class="testi-quote">"</div>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">
-          The telehealth option made expert care accessible without disrupting my work
-          life. Maria is incredibly thorough and responsive. For the first time in years,
-          I feel truly supported on this journey.
-        </p>
-        <div class="testi-author">
-          <div class="tauth-ava">R</div>
-          <div>
-            <div class="tauth-name">Robert K.</div>
-            <div class="tauth-loc">Telehealth Patient · Riverside, CA</div>
-          </div>
-        </div>
-      </div>
-
+      <div class="tcard reveal"><div class="tq">"</div><div class="ts">★★★★★</div><p>Dr. Singh and his team gave me my life back. After years of struggling, I finally found a practice that treated me with dignity. Three years sober and couldn't be more grateful.</p><div class="ta"><div class="tav">J</div><div><div class="tan">James T.</div><div class="tal">Patient since 2021 · Redlands, CA</div></div></div></div>
+      <div class="tcard reveal rev3"><div class="tq">"</div><div class="ts">★★★★★</div><p>Dr. Anand truly understands how mental health and addiction are intertwined. She took my anxiety seriously from day one and treated both simultaneously. Unlike anything I'd experienced.</p><div class="ta"><div class="tav">S</div><div><div class="tan">Sandra M.</div><div class="tal">Patient since 2022 · San Bernardino, CA</div></div></div></div>
+      <div class="tcard reveal rev5"><div class="tq">"</div><div class="ts">★★★★★</div><p>The telehealth option made expert care accessible without disrupting my work life. Maria is incredibly thorough and responsive. For the first time in years, I feel truly supported.</p><div class="ta"><div class="tav">R</div><div><div class="tan">Robert K.</div><div class="tal">Telehealth Patient · Riverside, CA</div></div></div></div>
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════
-       CTA
-  ════════════════════════════════════════ -->
+  <!-- ═══════════ CTA ═══════════ -->
   <section class="cta-section">
-    <div class="cta-orb-1"></div>
-    <div class="cta-orb-2"></div>
-    <div class="cta-content">
-      <div class="sec-kicker" style="justify-content:center; margin-bottom:1.5rem">
-        <div class="sec-kicker-dot" style="background:var(--gold)"></div>
-        <div class="sec-kicker-text" style="color:var(--gold)">Take the First Step</div>
-      </div>
+    <div class="cta-orb cta-orb-1"></div>
+    <div class="cta-orb cta-orb-2"></div>
+    <div class="cta-body">
+      <div class="sec-kicker" style="justify-content:center;margin-bottom:1.2rem"><span class="sk-dot" style="background:var(--gold)"></span><span style="color:var(--gold)">Take the First Step</span></div>
       <h2>You Deserve a Path<br>Forward. <em>We're Here.</em></h2>
-      <p>
-        Recovery is possible. Contact our compassionate team today for a confidential
-        consultation — no judgment, only expert care.
-      </p>
-      <div class="cta-buttons">
+      <p>Recovery is possible. Contact our compassionate team today for a confidential consultation — no judgment, only expert care.</p>
+      <div class="cta-btns">
         <a href="tel:9095550182" class="btn-gold"><span>📞 Call (909) 555-0182</span></a>
-        <a href="mailto:care@clarityhealth.com" class="btn-ghost" style="color:rgba(255,255,255,0.6)">
-          Email Our Team
-          <div class="btn-ghost-arrow">→</div>
-        </a>
+        <a href="mailto:care@clarityhealth.com" class="btn-ghost">Email Our Team <div class="ghost-arrow">→</div></a>
       </div>
-      <div class="cta-phone" style="justify-content:center">
-        <span>24/7 Crisis Helpline:</span>
-        <strong>1-800-662-HELP (4357)</strong>
-      </div>
+      <div class="crisis-line">24/7 Crisis Helpline: <strong>1-800-662-HELP (4357)</strong></div>
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════
-       FOOTER
-  ════════════════════════════════════════ -->
+  <!-- ═══════════ FOOTER ═══════════ -->
   <footer>
     <div class="footer-crisis">
-      <div>
-        <p>If you or someone you know is in crisis, please call the SAMHSA National Helpline</p>
-        <strong>1-800-662-HELP (4357) — Free, Confidential, 24/7</strong>
-      </div>
+      <div><p>SAMHSA National Helpline — Free, Confidential, 24/7</p><strong>1-800-662-HELP (4357)</strong></div>
       <a href="tel:18006624357" class="btn-gold"><span>Call Now</span></a>
     </div>
-
     <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="footer-brand-logo">Clarity<span>Health</span></a>
-        <p>
-          Board-certified addiction medicine serving Redlands and the greater Inland Empire
-          since 2009. We believe recovery is possible for everyone.
-        </p>
+      <div>
+        <a href="#" class="footer-logo">Narinder Singh <span>MD Inc</span></a>
+        <p>Board-certified addiction medicine serving Redlands and the greater Inland Empire. Recovery is possible for everyone.</p>
         <div class="footer-acc">
-          <div class="footer-acc-tag">CARF Accredited</div>
-          <div class="footer-acc-tag">ASAM Member</div>
-          <div class="footer-acc-tag">SAMHSA</div>
-          <div class="footer-acc-tag">ABAM Certified</div>
+          <span>CARF Accredited</span><span>ASAM Member</span><span>SAMHSA</span><span>ABAM Certified</span>
         </div>
       </div>
-
-      <div class="footer-col">
+      <div class="fc">
         <h4>Services</h4>
-        <ul>
-          <li><a href="#">Medication-Assisted Treatment</a></li>
-          <li><a href="#">Dual Diagnosis</a></li>
-          <li><a href="#">Medical Detox</a></li>
-          <li><a href="#">Intensive Outpatient</a></li>
-          <li><a href="#">Telehealth</a></li>
-          <li><a href="#">Aftercare</a></li>
-        </ul>
+        <ul><li><a href="#">Medication-Assisted Treatment</a></li><li><a href="#">Dual Diagnosis</a></li><li><a href="#">Medical Detox</a></li><li><a href="#">Intensive Outpatient</a></li><li><a href="#">Telehealth</a></li><li><a href="#">Aftercare</a></li></ul>
       </div>
-
-      <div class="footer-col">
+      <div class="fc">
         <h4>Physicians</h4>
-        <ul>
-          <li><a href="#">Dr. Marcus Reyes, MD</a></li>
-          <li><a href="#">Dr. Priya Anand, MD</a></li>
-          <li><a href="#">Dr. Thomas Chen, DO</a></li>
-          <li><a href="#">Dr. Renée Fontaine, MD</a></li>
-          <li><a href="#">Dr. Samuel Adeyemi, PhD</a></li>
-          <li><a href="#">Maria Torres, PMHNP</a></li>
-        </ul>
+        <ul><li><a href="#">Dr. Narinder Singh, MD</a></li><li><a href="#">Dr. Priya Anand, MD</a></li><li><a href="#">Dr. Thomas Chen, DO</a></li><li><a href="#">Dr. Renée Fontaine, MD</a></li><li><a href="#">Dr. Samuel Adeyemi, PhD</a></li><li><a href="#">Maria Torres, PMHNP</a></li></ul>
       </div>
-
-      <div class="footer-col">
+      <div class="fc">
         <h4>Contact</h4>
-        <ul>
-          <li><a href="tel:9095550182">(909) 555-0182</a></li>
-          <li><a href="mailto:care@clarityhealth.com">care@clarityhealth.com</a></li>
-          <li><a href="#">350 E Citrus Ave, Ste 200</a></li>
-          <li><a href="#">Redlands, CA 92373</a></li>
-          <li style="margin-top:0.8rem"><a href="#">Patient Portal</a></li>
-          <li><a href="#">Insurance &amp; Billing</a></li>
-        </ul>
+        <ul><li><a href="tel:9095550182">(909) 555-0182</a></li><li><a href="mailto:care@clarityhealth.com">care@clarityhealth.com</a></li><li><a href="#">350 E Citrus Ave, Ste 200</a></li><li><a href="#">Redlands, CA 92373</a></li><li><a href="#">Patient Portal</a></li><li><a href="#">Insurance &amp; Billing</a></li></ul>
       </div>
     </div>
-
     <div class="footer-bottom">
-      <p>© 2025 Clarity Health Addiction Medicine. All rights reserved.</p>
-      <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">HIPAA Notice</a>
-        <a href="#">Terms of Use</a>
-      </div>
+      <p>© 2025 Narinder Singh MD Inc. All rights reserved.</p>
+      <div><a href="#">Privacy Policy</a><a href="#">HIPAA Notice</a><a href="#">Terms of Use</a></div>
     </div>
   </footer>
 
-  <!-- ── JS (loaded at end for performance) ── -->
   <script src="main.js"></script>
-
 </body>
 </html>
