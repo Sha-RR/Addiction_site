@@ -34,11 +34,40 @@
     <div class="nav-right">
       <span class="nav-phone">(909) 555-0182</span>
       <a href="#contact" class="nav-btn">Book Now</a>
+      <!-- Logo symbol top-right matching the brand image -->
+      <div class="nav-symbol">
+        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer gold circle -->
+          <circle cx="30" cy="30" r="28" stroke="url(#goldGrad)" stroke-width="1.5"/>
+          <!-- Inner circle -->
+          <circle cx="30" cy="30" r="20" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.5"/>
+          <!-- Face silhouette (side profile) -->
+          <path d="M34 14 C38 14 42 18 42 24 C42 30 38 35 34 37 L34 44 C34 45 33 46 32 46 L28 46 C27 46 26 45 26 44 L26 40 C22 39 19 36 19 32 C19 26 23 20 28 17 Z"
+                fill="url(#goldGrad)" opacity="0.25"/>
+          <!-- Brain outline (simplified) -->
+          <path d="M26 22 C24 20 22 21 22 24 C20 24 19 26 20 28 C19 29 19 31 21 32 C21 34 23 35 25 34 C26 36 28 36 30 35 C32 36 34 35 35 33 C37 33 38 31 37 29 C38 27 37 25 35 25 C35 22 33 20 30 21 C29 19 27 19 26 22Z"
+                stroke="url(#goldGrad)" stroke-width="1" fill="none" opacity="0.9"/>
+          <!-- Leaf stem -->
+          <path d="M28 35 C27 38 25 42 22 44" stroke="url(#goldGrad)" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
+          <!-- Leaves -->
+          <ellipse cx="24" cy="40" rx="4" ry="2" transform="rotate(-30 24 40)" fill="url(#goldGrad)" opacity="0.5"/>
+          <ellipse cx="21" cy="43" rx="3" ry="1.5" transform="rotate(20 21 43)" fill="url(#goldGrad)" opacity="0.4"/>
+          <!-- Star dots -->
+          <circle cx="36" cy="17" r="0.8" fill="url(#goldGrad)" opacity="0.7"/>
+          <circle cx="39" cy="20" r="0.5" fill="url(#goldGrad)" opacity="0.5"/>
+          <defs>
+            <linearGradient id="goldGrad" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#d4a853"/>
+              <stop offset="100%" stop-color="#f0cc7a"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
     </div>
   </nav>
 
   <!-- ════════════════════════════════════════
-       HERO
+       HERO  (image left · text right)
   ════════════════════════════════════════ -->
   <section class="hero">
 
@@ -47,22 +76,21 @@
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
 
-    <!-- Decorative SVG circle / crosshair -->
-    <svg class="hero-line-art" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="200" cy="200" r="190" stroke="white" stroke-width="1"/>
-      <circle cx="200" cy="200" r="140" stroke="white" stroke-width="0.5"/>
-      <circle cx="200" cy="200" r="90"  stroke="white" stroke-width="1"/>
-      <line x1="10"  y1="200" x2="390" y2="200" stroke="white" stroke-width="0.5"/>
-      <line x1="200" y1="10"  x2="200" y2="390" stroke="white" stroke-width="0.5"/>
-      <line x1="55"  y1="55"  x2="345" y2="345" stroke="white" stroke-width="0.3"/>
-      <line x1="345" y1="55"  x2="55"  y2="345" stroke="white" stroke-width="0.3"/>
-      <circle cx="200" cy="200" r="8" fill="white" opacity="0.5"/>
-      <circle cx="200" cy="60"  r="4" fill="white" opacity="0.3"/>
-      <circle cx="200" cy="340" r="4" fill="white" opacity="0.3"/>
-      <circle cx="60"  cy="200" r="4" fill="white" opacity="0.3"/>
-      <circle cx="340" cy="200" r="4" fill="white" opacity="0.3"/>
-    </svg>
+    <!-- LEFT — brand image -->
+    <div class="hero-image-side">
+      <div class="hero-img-wrap">
+        <img src="hero-image.jpg" alt="Compassionate Care. Comprehensive Wellness." class="hero-img"/>
+        <!-- floating credential badge -->
+        <div class="hero-img-badge">
+          <div class="hib-num">ABAM</div>
+          <div class="hib-label">Board Certified</div>
+        </div>
+        <!-- floating accent line -->
+        <div class="hero-img-accent-line"></div>
+      </div>
+    </div>
 
+    <!-- RIGHT — text content -->
     <div class="hero-content">
       <div class="hero-kicker">
         <div class="kicker-line"></div>
