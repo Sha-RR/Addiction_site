@@ -288,6 +288,7 @@ nav.stuck {
 }
 
 /* Main h1 */
+.hero-h1s,
 .hero-h1 {
   font-family: 'Playfair Display', serif;
   font-size: clamp(3rem, 5.5vw, 5rem);
